@@ -4,6 +4,9 @@ import java.util.Scanner;
 public class Task1 {
 	static private ArrayList<Integer> interval = new ArrayList<>();
 	static private ArrayList<Integer> fibonacciNums = new ArrayList<>();
+	static public boolean isEven = true;
+	static public boolean isOdd = true;
+	static public boolean isReverse = true;
 
 	public static void main(String[] args) {
 
@@ -22,20 +25,35 @@ public class Task1 {
 		System.out.println("You put interval [ " + begin + " ; " + end + " ];");
 
 		buildInterval(begin, end);
-		printList(interval, true, true, false);
+		
+		isEven = true;
+		isOdd = true;
+		isReverse = false;
+		
+		printList(interval, isEven, isOdd, isReverse);
 		System.out.println();
 
 		System.out.println("All odd numbers from interval in direct direction :");
-		printList(interval, false, true, false);
+		isEven = false;
+		isOdd = true;
+		isReverse = false;
+		printList(interval, isEven, isOdd, isReverse);
 		System.out.println();
 
 		System.out.println("All even numbers from interval in reverse direction :");
-		printList(interval, true, false, true);
+		isEven = true;
+		isOdd = false;
+		isReverse = true;
+		printList(interval, isEven, isOdd, isReverse);
 		System.out.println();
 
-		System.out.println("Sum of even numbers from interval: \n" + sumOfList(interval, true, false) + "\n");
-
-		System.out.println("Sum of odd numbers from interval: \n" + sumOfList(interval, false, true) + "\n");
+		isEven = true;
+		isOdd = false;
+		System.out.println("Sum of even numbers from interval: \n" + sumOfList(interval,isEven, isOdd) + "\n");
+		
+		isEven = false;
+		isOdd = true;
+		System.out.println("Sum of odd numbers from interval: \n" + sumOfList(interval, isEven, isOdd) + "\n");
 		
 		// ==============FINONACCI===============
 		
@@ -44,13 +62,22 @@ public class Task1 {
 		sizeOfSet = in.nextInt();
 
 		buildFibonacciNumbers(sizeOfSet);
-		printList(fibonacciNums, true, true, false);
+		isEven = true;
+		isOdd = true;
+		isReverse = false;
+		printList(fibonacciNums, isEven,isOdd, isReverse);
 		System.out.println();
 		
-		System.out.println("This is the biggest number of enen Fibonacci set: \n" + maxNumber(fibonacciNums, true, false));
-		System.out.println("This is the biggest number of odd Fibonacci set: \n" + maxNumber(fibonacciNums, false, true));
-		System.out.println("Percent of even numbers in Fibonacci set is:\n " + findPercente(fibonacciNums, true));
-		System.out.println("Percent of even numbers in Fibonacci set is:\n " + findPercente(fibonacciNums, false));
+		isEven = true;
+		isOdd = false;
+		System.out.println("This is the biggest number of even Fibonacci set: \n" + maxNumber(fibonacciNums, isEven, isOdd));
+		isEven = false;
+		isOdd = true;
+		System.out.println("This is the biggest number of odd Fibonacci set: \n" + maxNumber(fibonacciNums, isEven, isOdd));
+		isEven = true;
+		System.out.println("Percent of even numbers in Fibonacci set is:\n " + findPercente(fibonacciNums, isEven));
+		isEven = false;
+		System.out.println("Percent of odd numbers in Fibonacci set is:\n " + findPercente(fibonacciNums, isEven));
 
 		in.close();
 	}
