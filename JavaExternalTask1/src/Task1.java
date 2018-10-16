@@ -86,11 +86,12 @@ public class Task1 {
 
 	static private void buildInterval(int begin, int end) {
 		int length = end - begin;
+		
 		if (length <= 0) {
 			System.out.println("Incorrect data of begin and end of interval!");
 			return;
 		}
-
+		if ((begin < 0) && (end > 0)) length += 1;
 		for (int i = 0; i < length; i++) {
 			interval.add(begin + i);
 		}
@@ -99,28 +100,18 @@ public class Task1 {
 	static private void printList(ArrayList<Integer> list, boolean isEven, boolean isOdd, boolean isReverse) {
 		if (!isReverse) {
 			for (int num : list) {
-				if ((isEven) && (num % 2 == 0)) {
-					System.out.print(num + " ");
-				}
-				if ((isOdd) && (num % 2 != 0)) {
-					System.out.print(num + " ");
-				}
-				if (!isEven && !isOdd) {
+				if (((isEven) && (num % 2 == 0)) || ((isOdd) && (num % 2 != 0)) || (!isEven && !isOdd)) {
 					System.out.print(num + " ");
 				}
 			}
+
 		} else {
 			for (int i = list.size() - 1; i >= 0; i--) {
 				int num = list.get(i);
-				if ((isEven) && (num % 2 == 0)) {
+				if (((isEven) && (num % 2 == 0)) || ((isOdd) && (num % 2 != 0)) || (!isEven && !isOdd)) {
 					System.out.print(num + " ");
 				}
-				if ((isOdd) && (num % 2 != 0)) {
-					System.out.print(num + " ");
-				}
-				if (!isEven && !isOdd) {
-					System.out.print(num + " ");
-				}
+
 			}
 		}
 	};
@@ -128,13 +119,7 @@ public class Task1 {
 	static private int sumOfList(ArrayList<Integer> list, boolean isEven, boolean isOdd) {
 		int result = 0;
 		for (int num : list) {
-			if ((isEven) && (num % 2 == 0)) {
-				result += num;
-			}
-			if ((isOdd) && (num % 2 != 0)) {
-				result += num;
-			}
-			if (!isEven && !isOdd) {
+			if (((isEven) && (num % 2 == 0)) || ((isOdd) && (num % 2 != 0)) || (!isEven && !isOdd)) {
 				result += num;
 			}
 		}
@@ -161,15 +146,10 @@ public class Task1 {
 	static private int maxNumber(ArrayList<Integer> list, boolean isEven, boolean isOdd) {
 		int result = 0;
 		for (int num : list) {
-			if ((isEven) && (num % 2 == 0)) {
+			if (((isEven) && (num % 2 == 0)) || ((isOdd) && (num % 2 != 0)) || (!isEven && !isOdd)) {
 				result = Math.max(result, num);
 			}
-			if ((isOdd) && (num % 2 != 0)) {
-				result = Math.max(result, num);
-			}
-			if (!isEven && !isOdd) {
-				result = Math.max(result, num);
-			}
+
 		}
 		return result;
 	}
@@ -177,10 +157,7 @@ public class Task1 {
 	static private double findPercente(ArrayList<Integer> list, boolean isEven) {
 		int count = 0;
 		for (int num : list) {
-			if ((isEven) && (num % 2 == 0)) {
-				count += 1;
-			}
-			if ((!isEven) && (num % 2 != 0)) {
+			if (((isEven) && (num % 2 == 0)) || ((!isEven) && (num % 2 != 0))) {
 				count += 1;
 			}
 		}
