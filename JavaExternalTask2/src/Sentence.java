@@ -17,7 +17,7 @@ public class Sentence {
 		final int prime = 31;
 		int result = 1;
 		for (String word : words) {
-			result += prime * result + ((word == null) ? 0 : words.hashCode());
+			result += prime * result + ((word == null) ? 0 : word.hashCode());
 		}
 		return result;
 	}
