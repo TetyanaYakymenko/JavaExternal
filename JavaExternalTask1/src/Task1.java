@@ -25,11 +25,11 @@ public class Task1 {
 		System.out.println("You put interval [ " + begin + " ; " + end + " ];");
 
 		buildInterval(begin, end);
-		
+
 		isEven = true;
 		isOdd = true;
 		isReverse = false;
-		
+
 		printList(interval, isEven, isOdd, isReverse);
 		System.out.println();
 
@@ -49,14 +49,14 @@ public class Task1 {
 
 		isEven = true;
 		isOdd = false;
-		System.out.println("Sum of even numbers from interval: \n" + sumOfList(interval,isEven, isOdd) + "\n");
-		
+		System.out.println("Sum of even numbers from interval: \n" + sumOfList(interval, isEven, isOdd) + "\n");
+
 		isEven = false;
 		isOdd = true;
 		System.out.println("Sum of odd numbers from interval: \n" + sumOfList(interval, isEven, isOdd) + "\n");
-		
+
 		// ==============FINONACCI===============
-		
+
 		int sizeOfSet = 0;
 		System.out.println("Programm will build set of Fibonacci numbers. Please input size of the set: \n");
 		sizeOfSet = in.nextInt();
@@ -65,15 +65,17 @@ public class Task1 {
 		isEven = true;
 		isOdd = true;
 		isReverse = false;
-		printList(fibonacciNums, isEven,isOdd, isReverse);
+		printList(fibonacciNums, isEven, isOdd, isReverse);
 		System.out.println();
-		
+
 		isEven = true;
 		isOdd = false;
-		System.out.println("This is the biggest number of even Fibonacci set: \n" + maxNumber(fibonacciNums, isEven, isOdd));
+		System.out.println(
+				"This is the biggest number of even Fibonacci set: \n" + maxNumber(fibonacciNums, isEven, isOdd));
 		isEven = false;
 		isOdd = true;
-		System.out.println("This is the biggest number of odd Fibonacci set: \n" + maxNumber(fibonacciNums, isEven, isOdd));
+		System.out.println(
+				"This is the biggest number of odd Fibonacci set: \n" + maxNumber(fibonacciNums, isEven, isOdd));
 		isEven = true;
 		System.out.println("Percent of even numbers in Fibonacci set is:\n " + findPercente(fibonacciNums, isEven));
 		isEven = false;
