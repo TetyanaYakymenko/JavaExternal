@@ -1,6 +1,6 @@
 package classes.vehicles;
 
-;
+
 import interfaces.Swimable;
 
 public class AmphibianCar extends Car implements  Runnable, Swimable {

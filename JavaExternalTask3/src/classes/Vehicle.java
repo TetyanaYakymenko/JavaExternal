@@ -7,31 +7,31 @@ public class Vehicle {
 	private String name;
 	private int price;
 	private int speed;
-	private Date yearOfLunch;
+	private int yearOfLaunch;
 	private Coordinates coordinates;
 
 	public Vehicle(String name) {
-		this(name, 0, 0, new Date(), new Coordinates());
+		this(name, 0, 0, 2000, new Coordinates());
 	}
 
 	public Vehicle(String name, int price) {
-		this(name, price, 0, new Date(), new Coordinates());
+		this(name, price, 0, 2000, new Coordinates());
 	}
 
 	public Vehicle(String name, int price, int speed) {
-		this(name, price, speed, new Date(), new Coordinates());
+		this(name, price, speed, 2000, new Coordinates());
 	}
 
-	public Vehicle(String name, int price, int speed, Date yearOfLunch) {
-		this(name, price, speed, yearOfLunch, new Coordinates());
+	public Vehicle(String name, int price, int speed, int yearOfLaunch) {
+		this(name, price, speed, yearOfLaunch, new Coordinates());
 	}
 
-	public Vehicle(String name, int price, int speed, Date yearOfLunch, Coordinates coordinates) {
+	public Vehicle(String name, int price, int speed, int yearOfLaunch, Coordinates coordinates) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.speed = speed;
-		this.yearOfLunch = yearOfLunch;
+		this.yearOfLaunch = yearOfLaunch;
 		this.coordinates = coordinates;
 	}
 
@@ -45,8 +45,8 @@ public class Vehicle {
 		return this;
 	}
 
-	public Vehicle yearOfLunch(Date date) {
-		setYearOfLunch(date);
+	public Vehicle yearOfLaunch(int date) {
+		setYearOfLaunch(date);
 		return this;
 	}
 
@@ -60,8 +60,7 @@ public class Vehicle {
 		result.setPrice(this.price);
 		result.setSpeed(this.speed);
 		result.setCoordinates(this.getCoordinates().newInstance());
-		Date newYearOfLunch = (Date) this.yearOfLunch.clone();
-		result.setYearOfLunch(newYearOfLunch);
+		result.setYearOfLaunch(2000);
 		return result;
 	}
 
@@ -97,12 +96,12 @@ public class Vehicle {
 		this.speed = speed;
 	}
 
-	public Date getYearOfLunch() {
-		return yearOfLunch;
+	public int getYearOfLaunch() {
+		return yearOfLaunch;
 	}
 
-	public void setYearOfLunch(Date yearOfLunch) {
-		this.yearOfLunch = yearOfLunch;
+	public void setYearOfLaunch(int yearOfaLaunch) {
+		this.yearOfLaunch = yearOfLaunch;
 	}
 
 	@Override
@@ -113,7 +112,7 @@ public class Vehicle {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + price;
 		result = prime * result + speed;
-		result = prime * result + ((yearOfLunch == null) ? 0 : yearOfLunch.hashCode());
+		result = prime * result + yearOfLaunch;
 		return result;
 	}
 
@@ -140,17 +139,14 @@ public class Vehicle {
 			return false;
 		if (speed != other.speed)
 			return false;
-		if (yearOfLunch == null) {
-			if (other.yearOfLunch != null)
-				return false;
-		} else if (!yearOfLunch.equals(other.yearOfLunch))
+		if (yearOfLaunch != other.yearOfLaunch)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Vehicle [name=" + name + ", price=" + price + ", speed=" + speed + ", yearOfLunch=" + yearOfLunch
+		return "Vehicle [name=" + name + ", price=" + price + ", speed=" + speed + ", yearOfLaunch=" + yearOfLaunch
 				+ ", coordinates=" + coordinates + "]";
 	}
 
