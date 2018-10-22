@@ -7,9 +7,60 @@ public class Plane extends Vehicle implements Flyable {
 	private int countOfPassangers;
 	private int hightOfFlying;
 
+	public Plane() {
+		super("");
+		countOfPassangers = 0;
+
+	}
+
 	public Plane(String name) {
 		super(name);
 		countOfPassangers = 0;
+
+	}
+
+	public Plane(String name, int hightOfFlying) {
+		super(name);
+		countOfPassangers = hightOfFlying;
+
+	}
+
+	public Builder newBuilder() {
+		return new Builder();
+	}
+
+	public static class Builder extends Vehicle.Builder {
+		private int countOfPassangers;
+		private int hightOfFlying;
+
+		public Builder() {
+			super();
+		}
+
+		public Builder setCountOfPassangers(int countOfPassangers) {
+			this.countOfPassangers = countOfPassangers;
+			return this;
+		}
+
+		public Builder setHightOfFlying(int hightOfFlying) {
+			this.hightOfFlying = hightOfFlying;
+			return this;
+
+		}
+
+		public Plane build() {
+			Plane result = new Plane();
+			Vehicle vehicle = super.build();
+			result.setName(vehicle.getName());
+			result.setPrice(vehicle.getPrice());
+			result.setSpeed(vehicle.getSpeed());
+			result.setCoordinates(vehicle.getCoordinates());
+			result.setYearOfLaunch(vehicle.getYearOfLaunch());
+			result.setCountOfPassangers(this.countOfPassangers);
+			result.setHightOfFlying(this.hightOfFlying);
+
+			return result;
+		}
 
 	}
 
@@ -23,7 +74,7 @@ public class Plane extends Vehicle implements Flyable {
 
 		return result.countOfPassangers(this.countOfPassangers);
 	}
-	
+
 	public Plane hightOfFlying(int hightOfFlying) {
 		this.hightOfFlying = hightOfFlying;
 		return this;
@@ -72,7 +123,8 @@ public class Plane extends Vehicle implements Flyable {
 
 	@Override
 	public String toString() {
-		return "Plane [ " + super.toString() + " countOfPassangers=" + countOfPassangers + " hightOfFlying=" + hightOfFlying + "]";
+		return "Plane [ " + super.toString() + " countOfPassangers=" + countOfPassangers + " hightOfFlying="
+				+ hightOfFlying + "]";
 	}
 
 	@Override

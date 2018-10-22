@@ -8,6 +8,10 @@ public class Ship extends Vehicle implements Swimable {
 	private int countOfPassangers;
 	private int port;
 
+	public Ship() {
+		super("");
+	}
+
 	public Ship(String name) {
 		super(name);
 		countOfPassangers = 0;
@@ -17,6 +21,45 @@ public class Ship extends Vehicle implements Swimable {
 	public Ship countOfPassangers(int count) {
 		this.countOfPassangers = count;
 		return this;
+	}
+
+	public Builder newBuilder() {
+		return new Builder();
+	}
+
+	public static class Builder extends Vehicle.Builder {
+		private int countOfPassangers;
+		private int port;
+
+		public Builder() {
+			super();
+		}
+
+		public Builder setCountOfPassangers(int countOfPassangers) {
+			this.countOfPassangers = countOfPassangers;
+			return this;
+		}
+
+		public Builder setPort(int port) {
+			this.port = port;
+			return this;
+
+		}
+
+		public Ship build() {
+			Ship result = new Ship();
+
+			Vehicle vehicle = super.build();
+			result.setName(vehicle.getName());
+			result.setPrice(vehicle.getPrice());
+			result.setSpeed(vehicle.getSpeed());
+			result.setCoordinates(vehicle.getCoordinates());
+			result.setYearOfLaunch(vehicle.getYearOfLaunch());
+			result.setCountOfPassangers(this.countOfPassangers);
+			result.setPort(this.port);
+
+			return result;
+		}
 	}
 
 	public Ship newInstance() {

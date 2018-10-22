@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -21,62 +23,85 @@ import interfaces.Runable;
 import interfaces.Swimable;
 
 public class Helper {
-	private static final Logger LOGGER = Logger.getLogger( Helper.class.getName());
-	private static ArrayList<Vehicle> list = new ArrayList<>() ;
+	private static final Logger LOGGER = Logger.getLogger(Helper.class.getName());
+	private static ArrayList<Vehicle> list = new ArrayList<>();
 	private static ResourceBundle rb;
 	private static Locale locale;
-	
+
 	public static void main(String[] args) {
 		LOGGER.info("Choose language: \n 1. English; \n 2. Ukrainian;\n 3. Russian;");
-	
+
 		Scanner sc = new Scanner(System.in);
 		int language = 1;
-		while(true) {
+		while (true) {
 			try {
 				language = sc.nextInt();
 				break;
-				
-			}catch (InputMismatchException e) {
+
+			} catch (InputMismatchException e) {
 				LOGGER.log(Level.SEVERE, e.getMessage(), e);
 				sc.nextLine();
-			};
+			}
+			;
 		}
-		
+
 		setInternalisation(language);
 		createListVechicles();
-		dialogWithUser(); 
-		 
-		 
-	 }
-	
-	private static void createListVechicles() {
-		Plane planeTu = new Plane("TU27");
-		planeTu.hightOfFlying(3000).countOfPassangers(240).yearOfLaunch(2008).price(20000).speed(350).coordinates(new Coordinates(24, 56));
-		
-		Plane planeAn = new Plane("AN56");
-		planeTu.hightOfFlying(7000).countOfPassangers(307).yearOfLaunch(2011).price(26000).speed(400).coordinates(new Coordinates(6, 56));
-		
-		Plane planeIl = new Plane("IL06");
-		planeTu.hightOfFlying(5000).countOfPassangers(150).price(30000).yearOfLaunch(2013).speed(450).coordinates(new Coordinates(24, 5));
-		
-		Car volvo = new Car("Volvo");
-		volvo.price(75000).yearOfLaunch(2017).speed(200).coordinates(new Coordinates(2, 9));
-		
-		Car bmv = new Car("BMV");
-		bmv.price(70000).yearOfLaunch(2012).speed(150).coordinates(new Coordinates(2, 29));
+		dialogWithUser();
 
-		Ship ship = new Ship("ShipOne");
-		ship.countOfPassangers(1000).port(102).price(40000).yearOfLaunch(2004).speed(100);
-		
-		AmphibianCar amphCar = new AmphibianCar("Amphibia 001");
-		amphCar.price(75000).yearOfLaunch(2018).speed(200).coordinates(new Coordinates(23, 18));
-		
-		AmphibianCar amphCar2 = new AmphibianCar("Amphibia 002");
-		amphCar.price(70000).yearOfLaunch(2018).speed(210).coordinates(new Coordinates(23, 20));
-		
+	}
+
+	private static void createListVechicles() {
+		Plane planeTu = new Plane();
+		GregorianCalendar temp = new GregorianCalendar();
+		temp.set(Calendar.YEAR, 2008);
+		planeTu = (Plane) planeTu.newBuilder().setHightOfFlying(3000).setCountOfPassangers(240).setYearOfLaunch(temp)
+				.setSpeed(350).setName("TU27").setCoordinates(24, 56).build();
+
+		temp = new GregorianCalendar();
+		temp.set(Calendar.YEAR, 2011);
+		Plane planeAn = new Plane();
+		planeAn = (Plane) planeAn.newBuilder().setHightOfFlying(7000).setCountOfPassangers(307).setYearOfLaunch(temp)
+				.setName("AN56").setPrice(26000).setSpeed(400).setCoordinates(6, 56).build();
+
+		temp = new GregorianCalendar();
+		temp.set(Calendar.YEAR, 2011);
+		Plane planeIl = new Plane();
+		planeIl = (Plane) planeIl.newBuilder().setHightOfFlying(5000).setCountOfPassangers(150).setName("IL06")
+				.setPrice(30000).setYearOfLaunch(temp).setSpeed(450).setCoordinates(24, 5).build();
+
+		temp = new GregorianCalendar();
+		temp.set(Calendar.YEAR, 2017);
+		Car volvo = new Car();
+		volvo = (Car) volvo.newBuilder().setName("Volvo").setPrice(75000).setName("Volvo").setYearOfLaunch(temp)
+				.setSpeed(200).setCoordinates(2, 9).build();
+
+		temp = new GregorianCalendar();
+		temp.set(Calendar.YEAR, 2012);
+		Car bmv = new Car();
+		bmv = (Car) bmv.newBuilder().setName("BMV").setPrice(70000).setYearOfLaunch(temp).setSpeed(150)
+				.setCoordinates(2, 29).build();
+
+		temp = new GregorianCalendar();
+		temp.set(Calendar.YEAR, 2004);
+		Ship ship = new Ship();
+		ship = (Ship) ship.newBuilder().setCountOfPassangers(1000).setPort(102).setName("ShipOne").setPrice(40000)
+				.setYearOfLaunch(temp).setSpeed(100).build();
+
+		temp = new GregorianCalendar();
+		temp.set(Calendar.YEAR, 2018);
+		AmphibianCar amphCar = new AmphibianCar();
+		amphCar = (AmphibianCar) amphCar.newBuilder().setYearOfLaunch(temp).setPrice(75000).setSpeed(200)
+				.setCoordinates(23, 18).setName("Amphibia 001").build();
+
+		temp = new GregorianCalendar();
+		temp.set(Calendar.YEAR, 2018);
+		AmphibianCar amphCar2 = new AmphibianCar();
+		amphCar2 = (AmphibianCar) amphCar2.newBuilder().setYearOfLaunch(temp).setPrice(70000).setSpeed(210)
+				.setCoordinates(23, 20).setName("Amphibia 002").build();
+
 		BatCar myBatCar = BatCar.getInstance();
-		
-		
+
 		list.add(planeTu);
 		list.add(planeAn);
 		list.add(planeIl);
@@ -86,83 +111,85 @@ public class Helper {
 		list.add(amphCar);
 		list.add(amphCar2);
 		list.add(myBatCar);
-		
 
 	}
 
-	private static void dialogWithUser() {	
+	private static void dialogWithUser() {
 		LOGGER.info(rb.getString("message1"));
-		
-		
-		for(Vehicle item : list) {
+
+		for (Vehicle item : list) {
 			LOGGER.info(item.toString());
 		}
-		
+
 		LOGGER.info(rb.getString("message2"));
-		
+
 		int minPrice = minPrice(list);
-		
-		for(Vehicle item : list) {
-			if((2018 - item.getYearOfLaunch() >= 5) && ( minPrice == item.getPrice()))
+
+		for (Vehicle item : list) {
+			if ((2018 - item.getYearOfLaunch().get(Calendar.YEAR) >= 5) && (minPrice == item.getPrice()))
 				LOGGER.info(item.toString());
 		}
-		 
+
 		LOGGER.info(rb.getString("message3"));
-		 for (Vehicle item : list) {
-			 if((item instanceof Plane) && (((Plane)item).getHightOfFlying() >= 5000) && (((Plane)item).getYearOfLaunch() >= 2000)) {
-				 LOGGER.info(item.toString());
-			 }
-		 }
-		
-		 LOGGER.info(rb.getString("flyable"));
-		 for (Vehicle item : list) {
-			 if(item instanceof Flyable) {
-				 LOGGER.info(item.toString());
-			 }
-		 }
-		 LOGGER.info(rb.getString("moveable"));
 		for (Vehicle item : list) {
-			 if(item instanceof Runable) {
-				 LOGGER.info(item.toString());
-			 }
-		 }
+			if ((item instanceof Plane) && (((Plane) item).getHightOfFlying() >= 5000)
+					&& (((Plane) item).getYearOfLaunch().get(Calendar.YEAR) >= 2000)) {
+				LOGGER.info(item.toString());
+			}
+		}
+
+		LOGGER.info(rb.getString("flyable"));
+		for (Vehicle item : list) {
+			if (item instanceof Flyable) {
+				LOGGER.info(item.toString());
+			}
+		}
+		LOGGER.info(rb.getString("moveable"));
+		for (Vehicle item : list) {
+			if (item instanceof Runable) {
+				LOGGER.info(item.toString());
+			}
+		}
 		LOGGER.info(rb.getString("swimable"));
 		for (Vehicle item : list) {
-			 if(item instanceof Swimable) {
-				 LOGGER.info(item.toString());
-			 }
-		 }
-		LOGGER.info(rb.getString("message4"));
-		
-		int maxSpeed = maxSpeed(list);
-		
-		for(Vehicle item : list) {
-			if ( maxSpeed == item.getSpeed())
+			if (item instanceof Swimable) {
 				LOGGER.info(item.toString());
-		}	
+			}
+		}
+		LOGGER.info(rb.getString("message4"));
+
+		int maxSpeed = maxSpeed(list);
+
+		for (Vehicle item : list) {
+			if (maxSpeed == item.getSpeed())
+				LOGGER.info(item.toString());
+		}
 	}
-	
+
 	private static int minPrice(ArrayList<Vehicle> list) {
 		int tmp = 0;
-		
-		for(Vehicle item : list) {
-			if(tmp > item.getPrice()) tmp = item.getPrice();
+
+		for (Vehicle item : list) {
+			if (tmp > item.getPrice())
+				tmp = item.getPrice();
 		}
-		
+
 		return tmp;
 	}
+
 	private static int maxSpeed(ArrayList<Vehicle> list) {
 		int tmp = 0;
-		
-		for(Vehicle item : list) {
-			if(tmp < item.getPrice()) tmp = item.getSpeed();
+
+		for (Vehicle item : list) {
+			if (tmp < item.getPrice())
+				tmp = item.getSpeed();
 		}
-		
+
 		return tmp;
 	}
-	
+
 	private static void setInternalisation(int language) {
-		if((language <= 0) || (language >= 4))
+		if ((language <= 0) || (language >= 4))
 			throw new IncorrectInputException("You must choose 1,2 or 3.");
 		switch (language) {
 		case 1:
@@ -172,8 +199,7 @@ public class Helper {
 			locale = new Locale("ua", "Ua");
 			break;
 		default:
-			//locale = new  Locale("ru", "RU");
-			locale = new Locale("eng", "UK");
+			locale = new Locale("ru", "RU");
 			break;
 		}
 		rb = ResourceBundle.getBundle("text", locale);
