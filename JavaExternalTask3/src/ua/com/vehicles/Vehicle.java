@@ -1,4 +1,4 @@
-package classes;
+package ua.com.vehicles;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -138,10 +138,12 @@ public class Vehicle {
 	public GregorianCalendar getYearOfLaunch() {
 		return yearOfLaunch;
 	}
+	
 
 	public void setYearOfLaunch(GregorianCalendar yearOfLaunch) {
 		this.yearOfLaunch = yearOfLaunch;
 	}
+	
 
 	@Override
 	public int hashCode() {

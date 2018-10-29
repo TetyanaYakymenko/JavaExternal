@@ -1,28 +1,26 @@
-package classes.vehicles;
+package ua.com.vehicles.vehicles;
 
-import classes.Vehicle;
-import interfaces.Flyable;
+import ua.com.vehicles.Vehicle;
+import ua.com.vehicles.interfaces.Swimable;
 
-public class Plane extends Vehicle implements Flyable {
+public class Ship extends Vehicle implements Swimable {
+
 	private int countOfPassangers;
-	private int hightOfFlying;
+	private int port;
 
-	public Plane() {
+	public Ship() {
 		super("");
-		countOfPassangers = 0;
-
 	}
 
-	public Plane(String name) {
+	public Ship(String name) {
 		super(name);
 		countOfPassangers = 0;
-
+		port = 0;
 	}
 
-	public Plane(String name, int hightOfFlying) {
-		super(name);
-		countOfPassangers = hightOfFlying;
-
+	public Ship countOfPassangers(int count) {
+		this.countOfPassangers = count;
+		return this;
 	}
 
 	public Builder newBuilder() {
@@ -31,7 +29,7 @@ public class Plane extends Vehicle implements Flyable {
 
 	public static class Builder extends Vehicle.Builder {
 		private int countOfPassangers;
-		private int hightOfFlying;
+		private int port;
 
 		public Builder() {
 			super();
@@ -42,14 +40,15 @@ public class Plane extends Vehicle implements Flyable {
 			return this;
 		}
 
-		public Builder setHightOfFlying(int hightOfFlying) {
-			this.hightOfFlying = hightOfFlying;
+		public Builder setPort(int port) {
+			this.port = port;
 			return this;
 
 		}
 
-		public Plane build() {
-			Plane result = new Plane();
+		public Ship build() {
+			Ship result = new Ship();
+
 			Vehicle vehicle = super.build();
 			result.setName(vehicle.getName());
 			result.setPrice(vehicle.getPrice());
@@ -57,26 +56,21 @@ public class Plane extends Vehicle implements Flyable {
 			result.setCoordinates(vehicle.getCoordinates());
 			result.setYearOfLaunch(vehicle.getYearOfLaunch());
 			result.setCountOfPassangers(this.countOfPassangers);
-			result.setHightOfFlying(this.hightOfFlying);
+			result.setPort(this.port);
 
 			return result;
 		}
-
 	}
 
-	public Plane countOfPassangers(int countOfPassangers) {
-		this.countOfPassangers = countOfPassangers;
-		return this;
+	public Ship newInstance() {
+		Ship result = (Ship) super.newInstance();
+		result.countOfPassangers(this.countOfPassangers);
+		result.port(this.port);
+		return result;
 	}
 
-	public Plane newInstance() {
-		Plane result = (Plane) super.newInstance();
-
-		return result.countOfPassangers(this.countOfPassangers);
-	}
-
-	public Plane hightOfFlying(int hightOfFlying) {
-		this.hightOfFlying = hightOfFlying;
+	public Ship port(int port) {
+		this.port = port;
 		return this;
 	}
 
@@ -88,12 +82,17 @@ public class Plane extends Vehicle implements Flyable {
 		this.countOfPassangers = countOfPassangers;
 	}
 
-	public int getHightOfFlying() {
-		return hightOfFlying;
+	public int getPort() {
+		return port;
 	}
 
-	public void setHightOfFlying(int hightOfFlying) {
-		this.hightOfFlying = hightOfFlying;
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	@Override
+	public String toString() {
+		return "Ship [" + super.toString() + " countOfPassangers=" + countOfPassangers + ", port=" + port + "]";
 	}
 
 	@Override
@@ -101,7 +100,7 @@ public class Plane extends Vehicle implements Flyable {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + countOfPassangers;
-		result = prime * result + hightOfFlying;
+		result = prime * result + port;
 		return result;
 	}
 
@@ -113,24 +112,17 @@ public class Plane extends Vehicle implements Flyable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Plane other = (Plane) obj;
+		Ship other = (Ship) obj;
 		if (countOfPassangers != other.countOfPassangers)
 			return false;
-		if (hightOfFlying != other.hightOfFlying)
+		if (port != other.port)
 			return false;
 		return true;
 	}
 
 	@Override
-	public String toString() {
-		return "Plane [ " + super.toString() + " countOfPassangers=" + countOfPassangers + " hightOfFlying="
-				+ hightOfFlying + "]";
-	}
-
-	@Override
-	public void fly() {
-		System.out.println("Plane with name " + getName() + " is flying.");
+	public void swim() {
+		System.out.println("Ship with name " + getName() + " is swimming.");
 
 	}
-
 }

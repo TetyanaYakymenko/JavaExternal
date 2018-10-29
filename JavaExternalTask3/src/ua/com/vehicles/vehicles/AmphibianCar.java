@@ -1,8 +1,7 @@
-package classes.vehicles;
+package ua.com.vehicles.vehicles;
 
-import classes.Vehicle;
-import classes.vehicles.Car.Builder;
-import interfaces.Swimable;
+import ua.com.vehicles.Vehicle;
+import ua.com.vehicles.interfaces.Swimable;
 
 public class AmphibianCar extends Car implements Runnable, Swimable {
 	public AmphibianCar() {

@@ -1,12 +1,12 @@
-package classes.vehicles;
+package ua.com.vehicles.vehicles;
 
 import java.util.GregorianCalendar;
 
-import classes.Coordinates;
-import classes.Vehicle;
-import interfaces.Runable;
+import ua.com.vehicles.Coordinates;
+import ua.com.vehicles.Vehicle;
+import ua.com.vehicles.interfaces.Moveable;
 
-public class Car extends Vehicle implements Cloneable, Runable {
+public class Car extends Vehicle implements Cloneable, Moveable {
 	public Car() {
 		this("");
 	}
@@ -38,12 +38,11 @@ public class Car extends Vehicle implements Cloneable, Runable {
 			result.setPrice(vehicle.getPrice());
 			result.setSpeed(vehicle.getSpeed());
 			result.setCoordinates(vehicle.getCoordinates());
-			result.setYearOfLaunch(vehicle.getYearOfLaunch());
-			return result;
+			//result.setYearOfLaunch(vehicle.getYearOfLaunch());
+			return  new Car();//\\\result;
 		}
 	}
 
-	@Override
 	public int hashCode() {
 		return super.hashCode();
 	}

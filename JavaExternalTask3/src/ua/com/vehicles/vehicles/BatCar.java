@@ -1,13 +1,13 @@
-package classes.vehicles;
+package ua.com.vehicles.vehicles;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import classes.Coordinates;
-import classes.Vehicle;
-import classes.vehicles.Car.Builder;
-import interfaces.Flyable;
-import interfaces.Swimable;
+import ua.com.vehicles.Coordinates;
+import ua.com.vehicles.Vehicle;
+import ua.com.vehicles.interfaces.Flyable;
+import ua.com.vehicles.interfaces.Swimable;
+import ua.com.vehicles.vehicles.Car.Builder;
 
 public class BatCar extends Car implements Runnable, Swimable, Flyable {
 	private static BatCar instance;

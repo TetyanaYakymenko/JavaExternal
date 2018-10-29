@@ -1,4 +1,4 @@
-package classes;
+package ua.com.vehicles;
 
 public class Coordinates {
 	private int x;
