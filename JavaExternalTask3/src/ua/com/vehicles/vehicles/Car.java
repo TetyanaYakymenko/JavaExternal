@@ -7,6 +7,9 @@ import ua.com.vehicles.Vehicle;
 import ua.com.vehicles.interfaces.Moveable;
 
 public class Car extends Vehicle implements Cloneable, Moveable {
+	
+	private static final long serialVersionUID = 1L;
+
 	public Car() {
 		this("");
 	}
@@ -38,8 +41,8 @@ public class Car extends Vehicle implements Cloneable, Moveable {
 			result.setPrice(vehicle.getPrice());
 			result.setSpeed(vehicle.getSpeed());
 			result.setCoordinates(vehicle.getCoordinates());
-			//result.setYearOfLaunch(vehicle.getYearOfLaunch());
-			return  new Car();//\\\result;
+			result.setYearOfLaunch(vehicle.getYearOfLaunch());
+			return  (Car)result;
 		}
 	}
 

@@ -1,10 +1,12 @@
 package ua.com.vehicles;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Vehicle {
+public class Vehicle  implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private int price;
 	private int speed;

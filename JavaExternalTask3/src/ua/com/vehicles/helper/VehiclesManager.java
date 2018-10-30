@@ -1,5 +1,10 @@
 package ua.com.vehicles.helper;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -21,68 +26,100 @@ public enum VehiclesManager {
 	private VehiclesManager() {
 	}
 
-	public List<Vehicle> createListVechicles() {
+	public List<Vehicle> createListVechicles(File file) throws IOException {
+
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+
 		List<Vehicle> list = new ArrayList<>();
-		Plane planeTu = new Plane();
-		GregorianCalendar temp = new GregorianCalendar();
-		temp.set(Calendar.YEAR, 2008);
-		planeTu = (Plane) planeTu.newBuilder().setHightOfFlying(3000).setCountOfPassangers(240).setYearOfLaunch(temp)
-				.setSpeed(350).setName("TU27").setCoordinates(24, 56).build();
 
-		temp = new GregorianCalendar();
-		temp.set(Calendar.YEAR, 2011);
-		Plane planeAn = new Plane();
-		planeAn = (Plane) planeAn.newBuilder().setHightOfFlying(7000).setCountOfPassangers(307).setYearOfLaunch(temp)
-				.setName("AN56").setPrice(26000).setSpeed(400).setCoordinates(6, 56).build();
+		BufferedReader bufferedReader = null;
+		try {
+			bufferedReader = new BufferedReader(new FileReader(file));
+			int num = Integer.parseInt(bufferedReader.readLine());
+			for (int i = 0; i < num; i++) {
+				String[] values = bufferedReader.readLine().split("\\s");
+				if (values[0].equals("BatCar")) {
+					list.add(BatCar.getInstance());
+				}
+				if (values[0].equals("Car")) {
+					String name = values[1];
+					int price = Integer.parseInt(values[2]);
+					int speed = Integer.parseInt(values[3]);
+					int year = Integer.parseInt(values[4]);
+					int coordinataX = Integer.parseInt(values[5]);
+					int coordinataY = Integer.parseInt(values[6]);
 
-		temp = new GregorianCalendar();
-		temp.set(Calendar.YEAR, 2011);
-		Plane planeIl = new Plane();
-		planeIl = (Plane) planeIl.newBuilder().setHightOfFlying(5000).setCountOfPassangers(150).setName("IL06")
-				.setPrice(30000).setYearOfLaunch(temp).setSpeed(450).setCoordinates(24, 5).build();
+					GregorianCalendar temp = new GregorianCalendar();
+					temp.set(Calendar.YEAR, year);
+					Car car = new Car();
+					car = (Car) car.newBuilder().setName(name).setPrice(price).setYearOfLaunch(temp).setSpeed(speed)
+							.setCoordinates(coordinataX, coordinataY).build();
+					list.add(car);
 
-		temp = new GregorianCalendar();
-		temp.set(Calendar.YEAR, 2017);
-		Car volvo = new Car();
-		volvo = (Car) volvo.newBuilder().setName("Volvo").setPrice(75000).setName("Volvo").setYearOfLaunch(temp)
-				.setSpeed(200).setCoordinates(2, 9).build();
+				}
+				if (values[0].equals("AmphibianCar")) {
+					String name = values[1].toString();
+					int price = Integer.parseInt(values[2]);
+					int speed = Integer.parseInt(values[3]);
+					int year = Integer.parseInt(values[4]);
+					int coordinataX = Integer.parseInt(values[5]);
+					int coordinataY = Integer.parseInt(values[6]);
 
-		temp = new GregorianCalendar();
-		temp.set(Calendar.YEAR, 2012);
-		Car bmv = new Car();
-		bmv = (Car) bmv.newBuilder().setName("BMV").setPrice(70000).setYearOfLaunch(temp).setSpeed(150)
-				.setCoordinates(2, 29).build();
+					GregorianCalendar temp = new GregorianCalendar();
+					temp.set(Calendar.YEAR, year);
+					AmphibianCar car = new AmphibianCar();
+					car = (AmphibianCar) car.newBuilder().setName(name).setPrice(price).setYearOfLaunch(temp)
+							.setSpeed(speed).setCoordinates(coordinataX, coordinataY).build();
+					list.add(car);
 
-		temp = new GregorianCalendar();
-		temp.set(Calendar.YEAR, 2004);
-		Ship ship = new Ship();
-		ship = (Ship) ship.newBuilder().setCountOfPassangers(1000).setPort(102).setName("ShipOne").setPrice(40000)
-				.setYearOfLaunch(temp).setSpeed(100).build();
+				}
+				if (values[0].equals("Plane")) {
+					int hightOfFlying = Integer.parseInt(values[1]);
+					int countOfPassengers = Integer.parseInt(values[2]);
+					String name = values[3];
+					int price = Integer.parseInt(values[4]);
+					int speed = Integer.parseInt(values[5]);
+					int year = Integer.parseInt(values[6]);
+					int coordinataX = Integer.parseInt(values[7]);
+					int coordinataY = Integer.parseInt(values[8]);
 
-		temp = new GregorianCalendar();
-		temp.set(Calendar.YEAR, 2018);
-		AmphibianCar amphCar = new AmphibianCar();
-		amphCar = (AmphibianCar) amphCar.newBuilder().setYearOfLaunch(temp).setPrice(75000).setSpeed(200)
-				.setCoordinates(23, 18).setName("Amphibia 001").build();
+					GregorianCalendar temp = new GregorianCalendar();
+					temp.set(Calendar.YEAR, year);
+					Plane plane = new Plane();
+					plane = (Plane) plane.newBuilder().setHightOfFlying(hightOfFlying)
+							.setCountOfPassengers(countOfPassengers).setName(name).setPrice(price).setYearOfLaunch(temp)
+							.setSpeed(speed).setCoordinates(coordinataX, coordinataY).build();
+					list.add(plane);
 
-		temp = new GregorianCalendar();
-		temp.set(Calendar.YEAR, 2018);
-		AmphibianCar amphCar2 = new AmphibianCar();
-		amphCar2 = (AmphibianCar) amphCar2.newBuilder().setYearOfLaunch(temp).setPrice(70000).setSpeed(210)
-				.setCoordinates(23, 20).setName("Amphibia 002").build();
+				}
+				if (values[0].equals("Ship")) {
+					int countOfPassengers = Integer.parseInt(values[1]);
+					int port = Integer.parseInt(values[2]);
+					String name = values[3];
+					int price = Integer.parseInt(values[4]);
+					int speed = Integer.parseInt(values[5]);
+					int year = Integer.parseInt(values[6]);
+					int coordinataX = Integer.parseInt(values[7]);
+					int coordinataY = Integer.parseInt(values[8]);
 
-		BatCar myBatCar = BatCar.getInstance();
+					GregorianCalendar temp = new GregorianCalendar();
+					temp.set(Calendar.YEAR, year);
+					Ship ship = new Ship();
+					ship = (Ship) ship.newBuilder().setPort(port).setCountOfPassengers(countOfPassengers).setName(name)
+							.setPrice(price).setYearOfLaunch(temp).setSpeed(speed)
+							.setCoordinates(coordinataX, coordinataY).build();
+					list.add(ship);
 
-		list.add(planeTu);
-		list.add(planeAn);
-		list.add(planeIl);
-		list.add(volvo);
-		list.add(bmv);
-		list.add(ship);
-		list.add(amphCar);
-		list.add(amphCar2);
-		list.add(myBatCar);
+				}
 
+			}
+		} finally {
+			if (bufferedReader != null) {
+				bufferedReader.close();
+			}
+		}
 		return list;
 	}
 

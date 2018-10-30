@@ -5,7 +5,8 @@ import ua.com.vehicles.interfaces.Swimable;
 
 public class Ship extends Vehicle implements Swimable {
 
-	private int countOfPassangers;
+	private static final long serialVersionUID = 1L;
+	private int countOfPassengers;
 	private int port;
 
 	public Ship() {
@@ -14,12 +15,12 @@ public class Ship extends Vehicle implements Swimable {
 
 	public Ship(String name) {
 		super(name);
-		countOfPassangers = 0;
+		countOfPassengers = 0;
 		port = 0;
 	}
 
-	public Ship countOfPassangers(int count) {
-		this.countOfPassangers = count;
+	public Ship countOfPassengers(int count) {
+		this.countOfPassengers = count;
 		return this;
 	}
 
@@ -28,15 +29,15 @@ public class Ship extends Vehicle implements Swimable {
 	}
 
 	public static class Builder extends Vehicle.Builder {
-		private int countOfPassangers;
+		private int countOfPassengers;
 		private int port;
 
 		public Builder() {
 			super();
 		}
 
-		public Builder setCountOfPassangers(int countOfPassangers) {
-			this.countOfPassangers = countOfPassangers;
+		public Builder setCountOfPassengers(int countOfPassengers) {
+			this.countOfPassengers = countOfPassengers;
 			return this;
 		}
 
@@ -55,7 +56,7 @@ public class Ship extends Vehicle implements Swimable {
 			result.setSpeed(vehicle.getSpeed());
 			result.setCoordinates(vehicle.getCoordinates());
 			result.setYearOfLaunch(vehicle.getYearOfLaunch());
-			result.setCountOfPassangers(this.countOfPassangers);
+			result.setCountOfPassengers(this.countOfPassengers);
 			result.setPort(this.port);
 
 			return result;
@@ -64,7 +65,7 @@ public class Ship extends Vehicle implements Swimable {
 
 	public Ship newInstance() {
 		Ship result = (Ship) super.newInstance();
-		result.countOfPassangers(this.countOfPassangers);
+		result.countOfPassengers(this.countOfPassengers);
 		result.port(this.port);
 		return result;
 	}
@@ -74,12 +75,12 @@ public class Ship extends Vehicle implements Swimable {
 		return this;
 	}
 
-	public int getCountOfPassangers() {
-		return countOfPassangers;
+	public int getCountOfPassengers() {
+		return countOfPassengers;
 	}
 
-	public void setCountOfPassangers(int countOfPassangers) {
-		this.countOfPassangers = countOfPassangers;
+	public void setCountOfPassengers(int countOfPassengers) {
+		this.countOfPassengers = countOfPassengers;
 	}
 
 	public int getPort() {
@@ -92,14 +93,14 @@ public class Ship extends Vehicle implements Swimable {
 
 	@Override
 	public String toString() {
-		return "Ship [" + super.toString() + " countOfPassangers=" + countOfPassangers + ", port=" + port + "]";
+		return "Ship [" + super.toString() + " countOfPassengers=" + countOfPassengers + ", port=" + port + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + countOfPassangers;
+		result = prime * result + countOfPassengers;
 		result = prime * result + port;
 		return result;
 	}
@@ -113,7 +114,7 @@ public class Ship extends Vehicle implements Swimable {
 		if (getClass() != obj.getClass())
 			return false;
 		Ship other = (Ship) obj;
-		if (countOfPassangers != other.countOfPassangers)
+		if (countOfPassengers != other.countOfPassengers)
 			return false;
 		if (port != other.port)
 			return false;

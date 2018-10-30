@@ -4,12 +4,20 @@ import ua.com.vehicles.Vehicle;
 import ua.com.vehicles.interfaces.Swimable;
 
 public class AmphibianCar extends Car implements Runnable, Swimable {
+	
+	private static final long serialVersionUID = 1L;
+
 	public AmphibianCar() {
 		this("");
 	}
 
 	public AmphibianCar(String name) {
 		super(name);
+	}
+	
+	@Override
+	public String toString() {
+		return "AmphibianCar [" + super.toString() + "]";
 	}
 
 	@Override
