@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<greenhouse>
+	<flower id='1' isGarden="yes">
+		<name>Gibiscus</name>
+		<soil>Podsolic</soil>
+		<origin>Southeast_Asia</origin>
+		<visual_parameters>
+			<stem_color>green</stem_color>
+			<leaf_color>green</leaf_color>
+			<average_size>1.5</average_size>
+		</visual_parameters>
+		<growing_tips>
+			<temperature>20-22</temperature>
+			<lighting>well lit</lighting>
+			<watering>700</watering>
+		</growing_tips>
+		<multiplying>Cuttings</multiplying>
+		<multiplying>Seeds</multiplying>
+	</flower>
+
+	<flower id='2' isGarden="no">
+		<name>Schefflera</name>
+		<soil>Sod-podsolic</soil>
+		<origin>Tropics</origin>
+		<visual_parameters>
+			<stem_color>green</stem_color>
+			<leaf_color>light green</leaf_color>
+			<average_size>2</average_size>
+		</visual_parameters>
+		<growing_tips>
+			<temperature>18-20</temperature>
+			<lighting>well lit</lighting>
+			<watering>500</watering>
+		</growing_tips>
+		<multiplying>Cuttings</multiplying>
+		<multiplying>Seeds</multiplying>
+		<multiplying>Air layouts</multiplying>
+	</flower>
+
+	<flower id='3' isGarden="yes">
+		<name>Rose</name>
+		<soil>Unpaved</soil>
+		<origin>Tropics</origin>
+		<visual_parameters>
+			<stem_color>green</stem_color>
+			<leaf_color>dark green</leaf_color>
+			<average_size>0.5</average_size>
+		</visual_parameters>
+		<growing_tips>
+			<temperature>20-25</temperature>
+			<lighting>mild lit</lighting>
+			<watering>700</watering>
+		</growing_tips>
+		<multiplying>Cuttings</multiplying>
+		<multiplying>Seeds</multiplying>
+		<multiplying>Air layouts</multiplying>
+	</flower>
+</greenhouse>
