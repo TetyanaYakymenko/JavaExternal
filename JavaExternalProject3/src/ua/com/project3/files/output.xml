@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<greenHouse>
+    <flower id="1" isGarden="yes">
+        <name>Gibiscus</name>
+        <soil>Podsolic</soil>
+        <origin>Southeast_Asia</origin>
+        <visualParameters>
+            <stemColor>green</stemColor>
+            <leafColor>green</leafColor>
+            <averageSize>1.5</averageSize>
+        </visualParameters>
+        < growingTips>
+            <temperature>20-22</temperature>
+            <lighting>well lit</lighting>
+            <watering>700</watering>
+        </growingTips>
+        <multiplyings><multiplying>Cutting</multiplying><multiplying>Seeds</multiplying></multiplyings></flower><flower id="2" isGarden="no"><name>Schefflera</name><soil>Sod-podsolic</soil><origin>Tropics</origin><visualParameters><stemColor>green</stemColor><leafColor>green</leafColor><averageSize>1.5</averageSize></visualParameters><growingTips><temperature>20-22</temperature><lighting>well lit</lighting><watering>700</watering></growingTips><multiplyings><multiplying>Cutting</multiplying><multiplying>Seeds</multiplying></multiplyings></flower></greenHouse>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="greenhouse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="flower" minOccurs="1"
+					maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string" minOccurs="1"
+								maxOccurs="1"></xs:element>
+							<xs:element name="soil" >
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="Podsolic" />
+										<xs:enumeration value="Sod-podsolic" />
+										<xs:enumeration value="Unpaved" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="origin" type="xs:string"
+								minOccurs="1" maxOccurs="1"></xs:element>
+							<xs:element name="visualParameters" minOccurs="1"
+								maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="stemColor" type="xs:string"></xs:element>
+										<xs:element name="leafColor" type="xs:string"
+											minOccurs="1" maxOccurs="1"></xs:element>
+										<xs:element name="averageSize" minOccurs="1"
+											maxOccurs="1">
+											<xs:simpleType>
+												<xs:restriction base="xs:decimal">
+													<xs:totalDigits value="5" />
+													<xs:fractionDigits value="2" />
+													<xs:minExclusive value="0" />
+													<xs:maxExclusive value="7" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="growingTips" minOccurs="1"
+								maxOccurs="1">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="temperature" minOccurs="1"
+											maxOccurs="1">
+											<xs:simpleType>
+												<xs:restriction base="xs:token">
+													<xs:pattern value="[0-9]{1,2}-[0-9]{1,2}" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="lighting" type="xs:string"
+											minOccurs="1" maxOccurs="1"></xs:element>
+										<xs:element name="watering" minOccurs="1"
+											maxOccurs="1">
+											<xs:simpleType>
+												<xs:restriction base="xs:nonNegativeInteger">
+													<xs:totalDigits value="5" />
+													<xs:minExclusive value="0" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="multiplying" minOccurs="1"
+								maxOccurs="unbounded">
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="Cuttings" />
+										<xs:enumeration value="Seeds" />
+										<xs:enumeration value="Air layouts" />
+										<xs:enumeration value="Leafs" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="id" type="xs:string" use="required"></xs:attribute>
+						<xs:attribute name="isGarden" use="optional">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="yes" />
+									<xs:enumeration value="no" />
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

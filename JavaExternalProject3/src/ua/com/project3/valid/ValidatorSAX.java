@@ -14,9 +14,9 @@ import org.xml.sax.SAXException;
 
 public class ValidatorSAX {
 	public static String XML_FILE = "src" + File.separator + "ua" + File.separator + "com" + File.separator + "project3"
-			+ File.separator + "greenhouse.xml";
+			+ File.separator + "xmlFlower" + File.separator + "greenhouse.xml";
 	public static String XSD_SCHEMA = "src" + File.separator + "ua" + File.separator + "com" + File.separator
-			+ "project3" + File.separator + "greenhouse.xsd";
+			+ "project3" + File.separator + "xmlFlower" + File.separator + "greenhouse.xsd";
 
 	public static void main(String[] args) {
 		Schema schema = null;
