@@ -1,8 +1,8 @@
 package ua.com.project3.xmlgreenhouse;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.*;
-import java.util.ArrayList;
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.EnumSet;
 
 @XmlRootElement
@@ -29,7 +29,8 @@ public class Flower {
         @XmlEnumValue("Sod-podsolic")
         SOD_PODSOLIC,
         @XmlEnumValue("Unpaved")
-        UNPRAVED;
+        UNPAVED;
+
         public String value() {
             return name();
         }
@@ -39,7 +40,7 @@ public class Flower {
         }
     }
 
-    @XmlElement(name = "soil" )
+    @XmlElement(name = "soil")
     private Soil soil;
     @XmlElement(required = true)
     private String origin;
@@ -48,11 +49,11 @@ public class Flower {
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "visualParameters", propOrder = {"stemColor", "leafColor", "averageSize"})
     public static class VisualParameters {
-        @XmlElement(name = "stemColor" )
+        @XmlElement(name = "stemColor")
         private String stemColor;
-        @XmlElement(name = "leafColor" )
+        @XmlElement(name = "leafColor")
         private String leafColor;
-        @XmlElement(name = "averageSize" )
+        @XmlElement(name = "averageSize")
         private double averageSize;
 
         public VisualParameters() {
@@ -85,7 +86,7 @@ public class Flower {
             return averageSize;
         }
 
-        public void setAverageSize(int averageSize) {
+        public void setAverageSize(double averageSize) {
             this.averageSize = averageSize;
         }
 
@@ -99,7 +100,7 @@ public class Flower {
         }
     }
 
-    @XmlElement(name = "visualParameters",required = true)
+    @XmlElement(name = "visualParameters", required = true)
     private VisualParameters visualParameters = new VisualParameters();
 
     @XmlRootElement
@@ -163,8 +164,8 @@ public class Flower {
 
 
     @XmlElementWrapper(name = "multiplyings")
-    @XmlElement(name ="multiplying" )
-    private EnumSet<Multiplying> multiplyings  = EnumSet.noneOf(Multiplying.class);
+    @XmlElement(name = "multiplying")
+    private EnumSet<Multiplying> multiplyings = EnumSet.noneOf(Multiplying.class);
 
     @XmlType
     @XmlEnum(String.class)
@@ -178,6 +179,7 @@ public class Flower {
         AIR_LAYOUTS,
         @XmlEnumValue("Leafs")
         LEAFS;
+
         public String value() {
             return name();
         }
@@ -269,8 +271,8 @@ public class Flower {
         return multiplyings;
     }
 
-    public void setMultyplyings(ArrayList<Multiplying> multyplyings) {
-        this.multiplyings = multiplyings;
+    public void setMultyplyings(EnumSet<Multiplying> multyplyings) {
+        this.multiplyings = EnumSet.copyOf(multyplyings);
     }
 
     public IsGarden getIsGarden() {

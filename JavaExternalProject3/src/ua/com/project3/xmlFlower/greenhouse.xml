@@ -14,7 +14,7 @@
 			<lighting>well lit</lighting>
 			<watering>700</watering>
 		</growingTips>
-		<multiplying>Cuttings</multiplying>
+		<multiplying>Cutting</multiplying>
 		<multiplying>Seeds</multiplying>
 	</flower>
 
@@ -32,9 +32,9 @@
 			<lighting>well lit</lighting>
 			<watering>500</watering>
 		</growingTips>
-		<multiplying>Cuttings</multiplying>
+		<multiplying>Cutting</multiplying>
 		<multiplying>Seeds</multiplying>
-		<multiplying>Air layouts</multiplying>
+		<multiplying>Air_layouts</multiplying>
 	</flower>
 
 	<flower id='3' isGarden="yes">
@@ -51,8 +51,8 @@
 			<lighting>mild lit</lighting>
 			<watering>700</watering>
 		</growingTips>
-		<multiplying>Cuttings</multiplying>
+		<multiplying>Cutting</multiplying>
 		<multiplying>Seeds</multiplying>
-		<multiplying>Air layouts</multiplying>
+		<multiplying>Air_layouts</multiplying>
 	</flower>
 </greenhouse>
