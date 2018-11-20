@@ -1,31 +1,36 @@
 package ua.com.calculator;
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-class InfixApp {
+class CalculatorDemo {
+    final static Logger logger = Logger.getLogger(CalculatorDemo.class);
+
     public static void main(String[] args) throws IOException {
         String input, output;
+        int result;
         while (true) {
-            System.out.print("Enter infix: ");
-            System.out.flush();
-            input = getString(); // Чтение строки с клавиатуры
-            if (input.equals("")) // Выход, если нажата клавиша [Enter]
+            logger.info("Enter infix: ");
+            input = getString();
+            if (input.equals(""))
                 break;
-            // Создание объекта-преобразователя
+
             InToPost theTrans = new InToPost(input);
-            output = theTrans.doTrans(); // Преобразование
-            System.out.println("Postfix is " + output + '\n');
+            output = theTrans.doTrans();
+            logger.info("Postfix is " + output + '\n');
+            ParsePost aParser = new ParsePost(output);
+            result = aParser.doParse();
+            logger.info("Evaluates to " + result);
         }
     }
 
-    //--------------------------------------------------------------
     public static String getString() throws IOException {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         String s = br.readLine();
         return s;
     }
-//--------------------------------------------------------------
 }

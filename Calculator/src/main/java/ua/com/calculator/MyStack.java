@@ -1,59 +1,53 @@
-package ua.com.calculator.calculate;
+package ua.com.calculator;
+
+import org.apache.log4j.Logger;
 
 class MyStack {
     private int maxSize;
-    private int[] stackArray;
+    private char[] stackArray;
     private int top;
 
-    public MyStack(int size)
-    {
+    public MyStack(int size) {
         maxSize = size;
-        stackArray = new int[maxSize];
+        stackArray = new char[maxSize];
         top = -1;
     }
 
-    public void push(int j)
-    {
+    public void push(char j) {
         stackArray[++top] = j;
     }
 
-    public int pop()
-    {
+    public char pop() {
         return stackArray[top--];
     }
 
-    public int peek()
-    {
+    public char peek() {
         return stackArray[top];
     }
 
-    public boolean isEmpty()
-    {
+    public boolean isEmpty() {
         return (top == -1);
     }
 
-    public boolean isFull()
-    {
+    public boolean isFull() {
         return (top == maxSize - 1);
     }
 
-    public int size()
-    {
+    public int size() {
         return top + 1;
     }
 
-    public int peekN(int n)
-    {
+    public char peekN(int n) {
         return stackArray[n];
     }
 
-    public void displayStack(String s) {
-        System.out.print(s);
+    public void displayStack(String s, Logger log) {
+        log.info(s);
         System.out.print("Stack (bottom-->top): ");
         for (int j = 0; j < size(); j++) {
-            System.out.print(peekN(j));
-            System.out.print(' ');
+            log.info(peekN(j));
+            log.info(' ');
         }
-        System.out.println("");
+        log.info("\n");
     }
 }
