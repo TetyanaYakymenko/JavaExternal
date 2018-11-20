@@ -58,7 +58,7 @@ public class GreeanHouseDOMBuilder {
         Flower.IsGarden isGarden = Flower.IsGarden.valueOf(flowerElement.getAttribute("isGarden").toUpperCase());
         flower.setIsGarden(isGarden);
         flower.setName(getElementTextContent(flowerElement, "name"));
-        Flower.Soil soil = Flower.Soil.valueOf(getElementTextContent(flowerElement, "soil").toUpperCase().replace("-","_"));
+        Flower.Soil soil = Flower.Soil.valueOf(getElementTextContent(flowerElement, "soil").toUpperCase().replace("-", "_"));
         flower.setSoil(soil);
         flower.setOrigin(getElementTextContent(flowerElement, "origin"));
 
@@ -83,7 +83,7 @@ public class GreeanHouseDOMBuilder {
         int size = multiplyingElements.getLength();
         EnumSet<Flower.Multiplying> multiplyings = EnumSet.noneOf(Flower.Multiplying.class);
         Flower.Multiplying mults;
-       for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             mults = Flower.Multiplying.valueOf(multiplyingElements.item(i).getTextContent().toUpperCase());
             multiplyings.add(mults);
         }
@@ -92,7 +92,7 @@ public class GreeanHouseDOMBuilder {
         return flower;
     }
 
-    // получение текстового содержимого тега
+
     private static String getElementTextContent(Element element, String elementName) {
         NodeList nList = element.getElementsByTagName(elementName);
         Node node = nList.item(0);

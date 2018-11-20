@@ -1,5 +1,6 @@
 package ua.com.project3.stax;
-// not ready for use!!!!!
+
+import ua.com.project3.FlowerEnum;
 import ua.com.project3.xmlgreenhouse.Flower;
 
 import javax.xml.stream.XMLInputFactory;
@@ -32,18 +33,13 @@ public class GreenHouseStAXBuilder {
         try {
             inputStream = new FileInputStream(new File(fileName));
             reader = inputFactory.createXMLStreamReader(inputStream);
-            // StAX parsing
             while (reader.hasNext()) {
                 int type = reader.next();
                 if (type == XMLStreamConstants.START_ELEMENT) {
                     name = reader.getLocalName();
-                    if (StudentEnum.valueOf(name.toUpperCase()) == StudentEnum.STUDENT) {
-                        Student st = buildStudent(reader);
-                        name = reader.getLocalName();
-                        if (StudentEnum.valueOf(name.toUpperCase()) == StudentEnum.STUDENT) {
-                            Student st = buildStudent(reader);
-                            students.add(st);
-                        }
+                    if (FlowerEnum.valueOf(name.toUpperCase()) == FlowerEnum.FLOWER) {
+                        Flower flower = buildFlower(reader);
+                        flowers.add(flower);
                     }
                 }
             }
@@ -62,74 +58,6 @@ public class GreenHouseStAXBuilder {
         }
     }
 
-    private Flower buildFlower(XMLStreamReader reader) throws XMLStreamException {
-        Flower st = new Flower();
-        //st.setLogin(reader.getAttributeValue(null, StudentEnum.LOGIN.getValue()));
-        //st.setFaculty(reader.getAttributeValue(null, StudentEnum.FACULTY.getValue())); // проверить на null
-        String name;
-        while (reader.hasNext()) {
-            int type = reader.next();
-            switch (type) {
-                case XMLStreamConstants.START_ELEMENT:
-                    name = reader.getLocalName();
-                    switch (StudentEnum.valueOf(name.toUpperCase())) {
-                        case NAME:
-                            st.setName(getXMLText(reader));
-                            break;
-                        case TELEPHONE:
-                            name = getXMLText(reader);
-                            st.setTelephone(Integer.parseInt(name));
-                            break;
-                        case ADDRESS:
-                            st.setAddress(getXMLAddress(reader));
-                            break;
-                    }
-                    break;
-                case XMLStreamConstants.END_ELEMENT:
-                    name = reader.getLocalName();
-                    if (StudentEnum.valueOf(name.toUpperCase()) == StudentEnum.STUDENT) {
-                        return st;
-                    }
-                    break;
-            }
-        }
-        throw new XMLStreamException("Unknown element in tag Student");
-    }
-
-    private Flower.VisualParameters getXMLVisualParameters(XMLStreamReader reader) throws XMLStreamException {
-        Student.Address address = new Student.Address();
-        int type;
-        String name;
-        while (reader.hasNext()) {
-            type = reader.next();
-            switch (type) {
-                case XMLStreamConstants.START_ELEMENT:
-                    name = reader.getLocalName();
-                    switch (StudentEnum.valueOf(name.toUpperCase())) {
-                        case COUNTRY:
-                            address.setCountry(getXMLText(reader));
-                            break;
-                        case CITY:
-                            address.setCity(getXMLText(reader));
-                            break;
-                        case STREET:
-                            address.setStreet(getXMLText(reader));
-                            break;
-                    }
-                    break;
-                case XMLStreamConstants.END_ELEMENT:
-                    name = reader.getLocalName();
-                    if (StudentEnum.valueOf(name.toUpperCase()) == StudentEnum.ADDRESS) {
-                        return address;
-                    }
-            }
-            break;
-        }
-
-        throw new XMLStreamException("Unknown element in tag Address");
-
-    }
-
     private String getXMLText(XMLStreamReader reader) throws XMLStreamException {
         String text = null;
         if (reader.hasNext()) {
@@ -139,5 +67,120 @@ public class GreenHouseStAXBuilder {
         return text;
     }
 
-}
+    private Flower buildFlower(XMLStreamReader reader) throws XMLStreamException {
+        Flower flower = new Flower();
+        flower.setId(reader.getAttributeValue(null, FlowerEnum.ID.getValue()));
+        String isGardenName = reader.getAttributeValue(null, FlowerEnum.ISGARDEN.getValue());
+        flower.setIsGarden(Flower.IsGarden.valueOf(isGardenName.toUpperCase()));
+        String name;
+        while (reader.hasNext()) {
+            int type = reader.next();
+            switch (type) {
+                case XMLStreamConstants.START_ELEMENT:
+                    name = reader.getLocalName();
+                    switch (FlowerEnum.valueOf(name.toUpperCase())) {
+                        case NAME:
+                            flower.setName(getXMLText(reader));
+                            break;
+                        case ORIGIN:
+                            flower.setOrigin(getXMLText(reader));
+                            break;
+                        case SOIL:
+                            String soilName = getXMLText(reader).replace("-", "_");
+                            flower.setSoil(Flower.Soil.valueOf(soilName.toUpperCase()));
+                            break;
+                        case VISUALPARAMETERS:
+                            flower.setVisualParameters(buildVisualParameters(reader));
+                            break;
+                        case GROWINGTIPS:
+                            flower.setGrowingTips(buildGrowingTips(reader));
+                            break;
+                        case MULTIPLYING:
+                            String Multname = getXMLText(reader);
+                            Flower.Multiplying multiplyingName = Flower.Multiplying.valueOf(Multname.toUpperCase());
+                            flower.getMultiplyingsplying().add(multiplyingName);
+                            break;
+                    }
+                    break;
+                case XMLStreamConstants.END_ELEMENT:
+                    name = reader.getLocalName();
+                    if (FlowerEnum.valueOf(name.toUpperCase()) == FlowerEnum.FLOWER) {
+                        return flower;
+                    }
+                    break;
+            }
+        }
+        throw new XMLStreamException("Unknown element in tag Flower");
+    }
+
+    private Flower.VisualParameters buildVisualParameters(XMLStreamReader reader) throws XMLStreamException {
+        Flower.VisualParameters visualParameters = new Flower.VisualParameters();
+        int type;
+        String name;
+        while (reader.hasNext()) {
+            type = reader.next();
+            switch (type) {
+                case XMLStreamConstants.START_ELEMENT:
+                    name = reader.getLocalName();
+                    switch (FlowerEnum.valueOf(name.toUpperCase())) {
+                        case STEMCOLOR:
+                            visualParameters.setStemColor(getXMLText(reader));
+                            break;
+                        case LEAFCOLOR:
+                            visualParameters.setLeafColor(getXMLText(reader));
+                            break;
+                        case AVERAGESIZE:
+                            visualParameters.setAverageSize(Double.valueOf(getXMLText(reader)));
+                            break;
+                    }
+                    break;
+                case XMLStreamConstants.END_ELEMENT:
+                    name = reader.getLocalName();
+                    if (FlowerEnum.valueOf(name.toUpperCase()) == FlowerEnum.VISUALPARAMETERS) {
+                        return visualParameters;
+                    }
+                    break;
+            }
+
+        }
+
+        throw new XMLStreamException("Unknown element in tag VisualParamenters");
+
+    }
+
+    private Flower.GrowingTips buildGrowingTips(XMLStreamReader reader) throws XMLStreamException {
+        Flower.GrowingTips growingTips = new Flower.GrowingTips();
+        int type;
+        String name;
+        while (reader.hasNext()) {
+            type = reader.next();
+            switch (type) {
+                case XMLStreamConstants.START_ELEMENT:
+                    name = reader.getLocalName();
+                    switch (FlowerEnum.valueOf(name.toUpperCase())) {
+                        case TEMPERATURE:
+                            growingTips.setTemperature(getXMLText(reader));
+                            break;
+                        case LIGHTING:
+                            growingTips.setLighting(getXMLText(reader));
+                            break;
+                        case WATERING:
+                            growingTips.setWatering(Integer.valueOf(getXMLText(reader)));
+                            break;
+                    }
+                    break;
+                case XMLStreamConstants.END_ELEMENT:
+                    name = reader.getLocalName();
+                    if (FlowerEnum.valueOf(name.toUpperCase()) == FlowerEnum.GROWINGTIPS) {
+                        return growingTips;
+                    }
+                    break;
+            }
+
+        }
+
+        throw new XMLStreamException("Unknown element in tag GrowingTips");
+
+    }
+
 }

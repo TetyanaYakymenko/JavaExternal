@@ -252,6 +252,9 @@ public class Flower {
     }
 
     public VisualParameters getVisualParameters() {
+        if(visualParameters == null){
+            visualParameters = new VisualParameters();
+        }
         return visualParameters;
     }
 
@@ -260,6 +263,9 @@ public class Flower {
     }
 
     public GrowingTips getGrowingTips() {
+        if(growingTips == null){
+            this.growingTips = new GrowingTips();
+        }
         return growingTips;
     }
 
@@ -268,6 +274,9 @@ public class Flower {
     }
 
     public EnumSet<Multiplying> getMultiplyingsplying() {
+        if(multiplyings == null){
+            multiplyings = EnumSet.noneOf(Multiplying.class);
+        }
         return multiplyings;
     }
 

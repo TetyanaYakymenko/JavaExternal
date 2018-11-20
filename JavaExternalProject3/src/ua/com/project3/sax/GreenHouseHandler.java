@@ -2,36 +2,91 @@ package ua.com.project3.sax;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
+import ua.com.project3.FlowerEnum;
+import ua.com.project3.xmlgreenhouse.Flower;
+
+import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GreenHouseHandler extends DefaultHandler {
 
-    @Override
-    public void startDocument() {
-        System.out.println("Parsing started");
+    private Set<Flower> flowers;
+    private Flower currentFlower = null;
+    private FlowerEnum currentEnum = null;
+    private EnumSet<FlowerEnum> withText;
+
+    public GreenHouseHandler() {
+        flowers = new HashSet<Flower>();
+        withText = EnumSet.range(FlowerEnum.NAME, FlowerEnum.LEAFCOLOR);
     }
 
-    @Override
+    public Set<Flower> getFlowers() {
+        return flowers;
+    }
+
     public void startElement(String uri, String localName, String qName, Attributes attrs) {
-        String s = localName + " ";
-        for (int i = 0; i < attrs.getLength(); i++) {
-            s +=  " " + attrs.getLocalName(i) + "=" + attrs.getValue(i);
+        if (FlowerEnum.FLOWER.getValue().equals(localName)) {
+            currentFlower = new Flower();
+            currentFlower.setId(attrs.getValue(0));
+            if (attrs.getLength() == 2) {
+                currentFlower.setIsGarden(Flower.IsGarden.valueOf(attrs.getValue(1).toUpperCase()));
+            }
+        } else {
+            FlowerEnum temp = FlowerEnum.valueOf(localName.toUpperCase());
+            if (withText.contains(temp)) {
+                currentEnum = temp;
+            }
         }
-        System.out.print(s);
     }
 
-    @Override
-    public void characters(char[] ch, int start, int length) {
-        System.out.print(new String(ch, start, length));
-    }
-
-    @Override
     public void endElement(String uri, String localName, String qName) {
-        System.out.print(" " + localName);
+        if (FlowerEnum.FLOWER.getValue().equals(localName)) {
+            flowers.add(currentFlower);
+        }
     }
 
-    @Override
-    public void endDocument() {
-        System.out.println("\nParsing ended");
+    public void characters(char[] ch, int start, int length) {
+        String s = new String(ch, start, length).trim();
+        if (currentEnum != null) {
+            switch (currentEnum) {
+
+                case NAME:
+                    currentFlower.setName(s);
+                    break;
+                case ORIGIN:
+                    currentFlower.setOrigin(s);
+                    break;
+                case SOIL:
+                    currentFlower.setSoil(Flower.Soil.valueOf(s.toUpperCase().replace("-", "_")));
+                    break;
+                case STEMCOLOR:
+                    currentFlower.getVisualParameters().setStemColor(s);
+                    break;
+                case LEAFCOLOR:
+                    currentFlower.getVisualParameters().setLeafColor(s);
+                    break;
+                case AVERAGESIZE:
+                    currentFlower.getVisualParameters().setAverageSize(Double.valueOf(s));
+                    break;
+                case TEMPERATURE:
+                    currentFlower.getGrowingTips().setTemperature(s);
+                    break;
+                case LIGHTING:
+                    currentFlower.getGrowingTips().setLighting(s);
+                    break;
+                case WATERING:
+                    currentFlower.getGrowingTips().setWatering(Integer.valueOf(s));
+                    break;
+                case MULTIPLYING:
+                    currentFlower.getMultiplyingsplying().add(Flower.Multiplying.valueOf(s.toUpperCase()));
+                    break;
+                default:
+                    throw new EnumConstantNotPresentException(
+                            currentEnum.getDeclaringClass(), currentEnum.name());
+            }
+        }
+        currentEnum = null;
     }
 
 }
