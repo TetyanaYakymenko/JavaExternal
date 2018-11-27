@@ -1,15 +1,21 @@
-package ua.com.threads.synchronize;
+package ua.com.threads.lock;
+
+import ua.com.threads.synchronize.Berth;
+import ua.com.threads.synchronize.Port;
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Ship implements Runnable {
-    private String name;
     private final int loadCapacity;
+    private String name;
     private Queue<String> containers = new LinkedList<String>();
     private Port port;
     private Berth berth;
+    private Lock lock = new ReentrantLock();
 
     public Ship(String name, int loadCapacity, Port port) {
         this.name = name;
@@ -37,36 +43,30 @@ public class Ship implements Runnable {
     }
 
     public void addContainer(String container) {
-        synchronized (containers) {
-            while (loadCapacity > containers.size()) {
-                try {
-                    containers.wait();
-                } catch (InterruptedException e) {
-                    System.out.println("InterruptedException in Ship.addContainer()");
-                }
-            }
+        while (loadCapacity > containers.size()) {
+            lock.lock();
             System.out.println("Add Container " + container + " in Ship " + name);
-            containers.add(container);
-            containers.notify();
+            try {
+                containers.add(container);
+            } finally {
+                lock.unlock();
+            }
         }
     }
 
     public String getContainer() {
-        String result;
-        synchronized (containers) {
-            if (containers.isEmpty()) {
-                try {
-                    containers.wait();
-                } catch (InterruptedException e) {
-                    System.out.println("InterruptedException in Ship.getContainer()");
-                }
-            }
-            result = containers.poll();
-            System.out.println("Get Container " + result + " from Ship " + name);
-            containers.notify();
-            return result;
-        }
+        String result = "";
 
+        if (containers.isEmpty()) {
+            lock.lock();
+            try {
+                result = containers.poll();
+            } finally {
+                lock.unlock();
+            }
+        }
+        System.out.println("Get Container " + result + " from Ship " + name);
+        return result;
     }
 
     public void generateContainers() {
@@ -77,31 +77,31 @@ public class Ship implements Runnable {
     }
 
     public void loadShipInPort() {
-        synchronized (berth) {
-            System.out.println(" Begin Load Ship " + name + " from berch " + berth.getId());
-            for (int i = 0; i < loadCapacity - containers.size(); i++) {
-                String contaiter = berth.getContainer();
-                if (contaiter != null) {
-                    addContainer(contaiter);
-                    berth.notify();
-                    return;
-                }
+        lock.lock();
+        System.out.println(" Begin Load Ship " + name + " from berch " + berth.getId());
+        for (int i = 0; i < loadCapacity - containers.size(); i++) {
+            String contaiter = berth.getContainer();
+            if (contaiter != null) {
+                addContainer(contaiter);
+                lock.unlock();
+                return;
             }
         }
+
     }
 
     public void unloadShipInPort() {
-        synchronized (berth) {
-            System.out.println(" Begin Unload Ship " + name + " from berch " + berth.getId());
-            for (int i = 0; i < containers.size(); i++) {
-                String contaiter = getContainer();
-                if (contaiter != null) {
-                    berth.setContainer(contaiter);
-                    return;
-                }
+        lock.lock();
+        System.out.println(" Begin Unload Ship " + name + " from berch " + berth.getId());
+        for (int i = 0; i < containers.size(); i++) {
+            String contaiter = getContainer();
+            if (contaiter != null) {
+                berth.setContainer(contaiter);
+                lock.unlock();
+                return;
             }
-            berth.notify();
         }
+
     }
 
     public void goInPort() {
@@ -155,3 +155,5 @@ public class Ship implements Runnable {
         }
     }
 }
+
+

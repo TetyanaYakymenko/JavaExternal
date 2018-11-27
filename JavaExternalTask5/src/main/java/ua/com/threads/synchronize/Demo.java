@@ -1,6 +1,7 @@
 package ua.com.threads.synchronize;
 
-import java.util.ArrayList;
+import  ua.com.threads.lock.Ship;
+//import ua.com.threads.collection.Ship;
 
 public class Demo {
     public static void main(String [] args){
