@@ -6,8 +6,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-class CalculatorDemo {
-    final static Logger logger = Logger.getLogger(CalculatorDemo.class);
+class CalculatorServer {
+    final static Logger logger = Logger.getLogger(CalculatorServer.class);
 
     public static void main(String[] args) throws IOException {
         String input, output;
