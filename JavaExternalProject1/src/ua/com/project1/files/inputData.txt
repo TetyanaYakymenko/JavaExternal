@@ -1,4 +1,0 @@
-3
-Flower;Rose;RED;15;04/11/2018;45
-Flower;Tulip;YELLOW;10;03/11/2018;30
-Accessory;RedBaloon;BALOON;25.00

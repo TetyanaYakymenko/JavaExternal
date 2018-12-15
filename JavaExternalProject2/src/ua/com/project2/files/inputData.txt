@@ -1,3 +1,0 @@
-Special thanks to all Thoughts on Java Supporters for supporting this article!
-This book will become one of my go-to references if I need advise to implement a complex task or to design a new API.
-I’m sure I will reread some of the more advanced items about lambdas and generics shortly.
