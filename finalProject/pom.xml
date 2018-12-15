@@ -24,7 +24,7 @@
             <url>http://download.java.net/maven/2</url>
         </repository>
     </repositories>
-    <description>MySQL</description>
+
 
     <dependencies>
         <dependency>
@@ -62,8 +62,6 @@
             <version>8.0.9-rc</version>
         </dependency>
 
-
-
         <!-- https://mvnrepository.com/artifact/jstl/jstl -->
         <dependency>
             <groupId>jstl</groupId>
@@ -77,6 +75,7 @@
             <version>8.0</version>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -116,10 +115,6 @@
                     <groupId>org.apache.tomcat.maven</groupId>
                     <artifactId>tomcat7-maven-plugin</artifactId>
                     <version>2.2</version>
-                    <configuration>
-                        <url>http://localhost:8080/manager/text</url>
-                        <server>TomcatServer</server>
-                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>

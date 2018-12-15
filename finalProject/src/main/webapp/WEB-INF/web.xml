@@ -4,6 +4,13 @@
          xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation=
                  "http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
+    <description>MySQL Test App</description>
+    <resource-ref>
+        <description>DB Connection</description>
+        <res-ref-name>jdbc/control_conferences</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
     <display-name> FirstJspServletJsp </display-name>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
@@ -27,15 +34,6 @@
         <servlet-name>StartServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
-
-    <description>MySQL Test App</description>
-    <resource-ref>
-        <description>DB Connection</description>
-        <res-ref-name>jdbc/control_conferences</res-ref-name>
-        <res-type>javax.sql.DataSource</res-type>
-        <res-auth>Container</res-auth>
-    </resource-ref>
 
     <filter>
         <filter-name>EncodingFilter</filter-name>

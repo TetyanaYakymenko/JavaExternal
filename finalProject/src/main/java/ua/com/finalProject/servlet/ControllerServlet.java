@@ -1,13 +1,12 @@
 package ua.com.finalProject.servlet;
 
-import ua.com.finalProject.resources.ConfigurationManager;
-import ua.com.finalProject.resources.MessageManager;
+import ua.com.finalProject.managers.ConfigurationManager;
+import ua.com.finalProject.managers.MessageManager;
 import ua.com.finalProject.ActionFactory;
 import ua.com.finalProject.command.ActionCommand;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -47,8 +46,8 @@ public class ControllerServlet extends HttpServlet {
 // установка страницы c cообщением об ошибке
             page = ConfigurationManager.getProperty("path.page.index");
             request.getSession().setAttribute("nullPage",
-                    MessageManager.getProperty("message.nullPage"));
-            response.sendRedirect(request.getContextPath() + page);
+                    MessageManager.getProperty("message.nullpage"));
+            response.sendRedirect(request.getContextPath() + page +"/");
         }
     }
 }

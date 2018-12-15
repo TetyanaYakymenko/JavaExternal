@@ -1,7 +1,7 @@
 package ua.com.finalProject.command;
 
-import ua.com.finalProject.resources.ConfigurationManager;
-import ua.com.finalProject.resources.MessageManager;
+import ua.com.finalProject.managers.ConfigurationManager;
+import ua.com.finalProject.managers.MessageManager;
 import ua.com.finalProject.logic.LoginLogic;
 
 import javax.servlet.http.HttpServletRequest;

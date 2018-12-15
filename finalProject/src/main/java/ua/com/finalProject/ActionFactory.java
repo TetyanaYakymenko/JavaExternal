@@ -1,6 +1,6 @@
 package ua.com.finalProject;
 
-import ua.com.finalProject.resources.MessageManager;
+import ua.com.finalProject.managers.MessageManager;
 import ua.com.finalProject.command.ActionCommand;
 import ua.com.finalProject.command.client.CommandEnum;
 import ua.com.finalProject.command.EmptyCommand;

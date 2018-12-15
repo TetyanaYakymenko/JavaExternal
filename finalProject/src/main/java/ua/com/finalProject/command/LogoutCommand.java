@@ -1,6 +1,6 @@
 package ua.com.finalProject.command;
 
-import ua.com.finalProject.resources.ConfigurationManager;
+import ua.com.finalProject.managers.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
 

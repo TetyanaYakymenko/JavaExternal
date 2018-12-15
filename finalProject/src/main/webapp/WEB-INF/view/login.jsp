@@ -18,11 +18,11 @@
                 <br/>
             </div>
 
-            ${errorLoginPassMessage}
+           <!-- ${errorLoginPassMessage}-->
             <br/>
-            ${wrongAction}
+           <!-- ${wrongAction}-->
             <br/>
-            ${nullPage}
+           <!-- ${nullPage}-->
             <br/>
             <button type="submit" class="btn btn-primary">Login in</button>
         </form>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <sql:query var="rs" dataSource="jdbc/control_conferences">
-select * from conference
+select * from conferences
 </sql:query>
 
 <html>
@@ -16,7 +16,7 @@ select * from conference
         <div class="card-body">
         <h3>Welcome</h3>
 
-         <c:out value="${user.login}"/>, hello!
+        <!-- <c:out value="${user.login}"/>, hello -->
         <div>
 
         <table border="2">
@@ -26,14 +26,13 @@ select * from conference
         <td>DATE</td>
         <td>PLACE</td>
         </tr>
-         <c:forEach var="row" items="${rs.rows}">
-            <tr>
-                <td class="center aligned">${row.id}</td>
-                <td class="center aligned">${row.name}</td>
-                <td class="center aligned">${row.date}</td>
-                <td class="center aligned">${row.place}</td>
-            </tr>
-
+            <c:forEach var="row" items="${rs.rows}">
+                        <tr>
+                            <td class="center aligned">${row.id}</td>
+                            <td class="center aligned">${row.name}</td>
+                            <td class="center aligned">${row.date}</td>
+                            <td class="center aligned">${row.place}</td>
+                        </tr>
         </div>
         </div>
         <jsp:include page="footer.jsp"/>

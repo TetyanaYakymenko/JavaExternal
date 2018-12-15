@@ -5,6 +5,7 @@
     <head>
     <body>
 
-        <jsp:forward page = "main.jsp"/>
+        <jsp:forward page = "login.jsp"/>
     </body>
 </html>
+
