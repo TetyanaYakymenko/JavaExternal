@@ -16,7 +16,7 @@ select * from conferences
         <div class="card-body">
         <h3>Welcome</h3>
 
-        <!-- <c:out value="${user.login}"/>, hello -->
+
         <div>
 
         <table border="2">

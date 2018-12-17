@@ -5,26 +5,30 @@
     </head>
     <body>
     <jsp:include page="header.jsp"/>
-        <form name = "LoginForm" class="px-4 py-3 mx-auto"  method = "POST" action = "controller">
-            <input type = "hidden" name = "command" value = "login" />
+        <form name = "LoginForm" class="px-4 py-3 mx-auto"  method = "POST" action = "main")
+"  >
+
             <div class="form-group mx-auto ">
                 <label for="login" style="width: 100px;">Login:</label>
-                <input type = "text" style="width: 300px;" placeholder="email@example.com" id="login" name = "login" value ="" />
+                <input type = "text" style="width: 300px;" placeholder="login" id="login" required="required" name = "login" value ="" />
                 <br/>
             </div>
             <div class="form-group mx-auto">
                 <label for="login" style="width: 100px;">Password :</label>
-                <input type = "password"  style="width: 300px;" name = "password"  placeholder="Password"value ="" />
+                <input type = "password"  style="width: 300px;" name = "password"  placeholder="Password" value ="" />
                 <br/>
             </div>
 
-           <!-- ${errorLoginPassMessage}-->
+           ${errorLoginPassMessage}
             <br/>
-           <!-- ${wrongAction}-->
+           ${wrongAction}
             <br/>
-           <!-- ${nullPage}-->
+           ${nullPage}
             <br/>
+            <div>
+             <input type = "hidden" name = "command"  value = "login" />
             <button type="submit" class="btn btn-primary">Login in</button>
+            </div>
         </form>
         <jsp:include page="footer.jsp"/>
 
