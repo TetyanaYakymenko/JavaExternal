@@ -1,23 +1,38 @@
 package ua.com.finalProject.command.client;
 
-import ua.com.finalProject.command.ActionCommand;
-import ua.com.finalProject.command.LoginCommand;
-import ua.com.finalProject.command.LogoutCommand;
+import ua.com.finalProject.command.*;
 
 public enum CommandEnum {
-        LOGIN {
-            {
-                this.command = new LoginCommand();
-            }
-        },
-        LOGOUT {
-            {
-                this.command = new LogoutCommand();
-            }
-        };
-        ActionCommand command;
-        public ActionCommand getCurrentCommand() {
-            return command;
+    LOGIN {
+        {
+            this.command = new LoginCommand();
         }
+    },
+    LOGOUT {
+        {
+            this.command = new LogoutCommand();
+        }
+    },
+    MAIN {
+        {
+            this.command = new MainCommand();
+        }
+    },
+    ADMIN {
+        {
+            this.command = new AdminCommand();
+        }
+    },
+    EDIT {
+        {
+            this.command = new EditCommand();
+        }
+    }
+    ;
+    ActionCommand command;
+
+    public ActionCommand getCurrentCommand() {
+        return command;
+    }
     }
 

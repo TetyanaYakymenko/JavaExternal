@@ -1,7 +1,8 @@
 package ua.com.finalProject.persistence.dao;
 
 import ua.com.finalProject.persistence.entities.Conference;
-import ua.com.finalProject.persistence.entities.Report;
+
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ConferenceDao extends AbstractDao<Conference> {
+    private static final Logger log = Logger.getLogger(ConferenceDao.class);
+
     public ConferenceDao(Connection connection) {
         super(connection);
     }
@@ -24,7 +27,7 @@ public class ConferenceDao extends AbstractDao<Conference> {
             }
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return resultingItems;
     }
@@ -39,7 +42,7 @@ public class ConferenceDao extends AbstractDao<Conference> {
             conference = createAndGet(resultSet);
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return conference;
     }
@@ -53,7 +56,7 @@ public class ConferenceDao extends AbstractDao<Conference> {
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }
@@ -71,7 +74,7 @@ public class ConferenceDao extends AbstractDao<Conference> {
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }
@@ -81,14 +84,22 @@ public class ConferenceDao extends AbstractDao<Conference> {
         Conference conference = null;
         try {
             conference = new Conference();
-            conference.setId(resultSet.getInt(1));
-            conference.setName(resultSet.getString(2));
+            conference.setId(resultSet.getInt("id"));
+            conference.setName(resultSet.getString("name"));
             GregorianCalendar calendar = new GregorianCalendar();
-            calendar.setTimeInMillis(resultSet.getDate(3).getTime());
-            conference.setDate(calendar);
-            conference.setPlace(resultSet.getString(4));
+
+            java.util.Date date = resultSet.getDate("date");
+
+            if (date != null) {
+
+                calendar.setTimeInMillis(date.getTime());
+                conference.setDate(calendar);
+            } else {
+                conference.setDate(null);
+            }
+            conference.setPlace(resultSet.getString("place"));
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return conference;
     }
@@ -97,15 +108,16 @@ public class ConferenceDao extends AbstractDao<Conference> {
     public boolean update(Conference entity) {
         int changeNumber = 0;
         try {
-            PreparedStatement statement = connection.prepareStatement("update conference SET name = ?, date = ?, place = ? WHERE id = ?; ");statement.setInt(1, entity.getId());
+            PreparedStatement statement = connection.prepareStatement("update conference SET name = ?, date = ?, place = ? WHERE id = ?; ");
+            statement.setInt(1, entity.getId());
             statement.setString(1, entity.getName());
-            statement.setDate(2, new Date(entity.getDate().getTimeInMillis()));
+            statement.setDate(2, new java.sql.Date(entity.getDate().getTimeInMillis()));
             statement.setString(3, entity.getPlace());
             statement.setInt(4, entity.getId());
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }

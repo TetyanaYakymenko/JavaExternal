@@ -1,12 +1,12 @@
 <%@ page language="java" contentType = "text/html; charset = UTF-8" pageEncoding = "UTF-8"%>
 <html>
     <head>
+    <title> Login
+    </title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </head>
     <body>
-    <jsp:include page="header.jsp"/>
-        <form name = "LoginForm" class="px-4 py-3 mx-auto"  method = "POST" action = "main")
-"  >
+        <form name = "LoginForm" class="px-4 py-3 mx-auto"  method = "POST" action = "main"  >
 
             <div class="form-group mx-auto ">
                 <label for="login" style="width: 100px;">Login:</label>

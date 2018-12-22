@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<sql:query var="rs" dataSource="jdbc/control_conferences">
-select * from conferences
-</sql:query>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 
 <html>
     <head>
@@ -12,30 +14,33 @@ select * from conferences
     </head>
     <body>
     <div>
-        <jsp:include page="header.jsp"/>
-        <div class="card-body">
-        <h3>Welcome</h3>
+    <jsp:include  page="header.jsp"/>
 
-
+        <form  class="card-body">
+        <h3>Welcome, ${sessionScope.login}</h3>
         <div>
-
+        <h5> Conferences </h5>
         <table border="2">
-        <tr>
-        <td>ID</td>
-        <td>NAME</td>
-        <td>DATE</td>
-        <td>PLACE</td>
-        </tr>
-            <c:forEach var="row" items="${rs.rows}">
-                        <tr>
-                            <td class="center aligned">${row.id}</td>
-                            <td class="center aligned">${row.name}</td>
-                            <td class="center aligned">${row.date}</td>
-                            <td class="center aligned">${row.place}</td>
-                        </tr>
+        <thead>
+            <tr>
+                <td>ID</th>
+                <td>NAME</td>
+                <td>DATE</td>
+                <td>PLACE</td>
+            </tr>
+        </thead>
+        <c:forEach var="c" items="${conferences}">
+                <tr>
+                    <td> ${c.getId()} </td>
+                    <td> ${c.getName()} </td>
+                    <td>  <fmt:formatDate value="${c.getDate().getTime()}" type="date"/></td>
+                    <td> ${c.getPlace()} </td>
+                </tr>
+        </c:forEach>
+        </table>
         </div>
-        </div>
+        </form>
         <jsp:include page="footer.jsp"/>
-       </div>dd
+       </div>
     </body>
 </html>

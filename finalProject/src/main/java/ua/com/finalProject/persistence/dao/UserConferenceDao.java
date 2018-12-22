@@ -1,7 +1,8 @@
 package ua.com.finalProject.persistence.dao;
 
-import ua.com.finalProject.persistence.entities.Role;
 import ua.com.finalProject.persistence.entities.UserConference;
+
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserConferenceDao extends AbstractDao<UserConference> {
+    private static final Logger log = Logger.getLogger(UserConferenceDao.class);
+
     public UserConferenceDao(Connection connection) {
         super(connection);
     }
@@ -26,7 +29,7 @@ public class UserConferenceDao extends AbstractDao<UserConference> {
             }
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return resultingItems;
     }
@@ -41,7 +44,7 @@ public class UserConferenceDao extends AbstractDao<UserConference> {
             userConference = createAndGet(resultSet);
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return userConference;
     }
@@ -55,7 +58,7 @@ public class UserConferenceDao extends AbstractDao<UserConference> {
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }
@@ -73,7 +76,7 @@ public class UserConferenceDao extends AbstractDao<UserConference> {
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }
@@ -83,12 +86,12 @@ public class UserConferenceDao extends AbstractDao<UserConference> {
         UserConference userConference = null;
         try {
             userConference = new UserConference();
-            userConference.setId(resultSet.getInt(1));
-            userConference.setUserId(resultSet.getInt(2));
-            userConference.setConferenceId(resultSet.getInt(3));
-            userConference.setVisited(resultSet.getBoolean(4));
+            userConference.setId(resultSet.getInt("id"));
+            userConference.setUserId(resultSet.getInt("user_id"));
+            userConference.setConferenceId(resultSet.getInt("conferece_id"));
+            userConference.setVisited(resultSet.getBoolean("visited"));
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return userConference;
     }
@@ -105,7 +108,7 @@ public class UserConferenceDao extends AbstractDao<UserConference> {
             statement.setInt(4, entity.getId());
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }

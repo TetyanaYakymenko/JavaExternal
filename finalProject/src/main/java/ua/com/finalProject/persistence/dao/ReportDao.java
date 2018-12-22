@@ -2,6 +2,8 @@ package ua.com.finalProject.persistence.dao;
 
 import ua.com.finalProject.persistence.entities.Report;
 
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportDao extends AbstractDao<Report> {
+    private static final Logger log = Logger.getLogger(ReportDao.class);
 
     public ReportDao(Connection connection) {
         super(connection);
@@ -26,7 +29,7 @@ public class ReportDao extends AbstractDao<Report> {
             }
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return resultingItems;
     }
@@ -41,7 +44,7 @@ public class ReportDao extends AbstractDao<Report> {
             report = createAndGet(resultSet);
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return report;
     }
@@ -55,7 +58,7 @@ public class ReportDao extends AbstractDao<Report> {
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }
@@ -73,7 +76,7 @@ public class ReportDao extends AbstractDao<Report> {
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }
@@ -83,12 +86,13 @@ public class ReportDao extends AbstractDao<Report> {
         Report report = null;
         try {
             report = new Report();
-            report.setId(resultSet.getInt(1));
-            report.setName(resultSet.getString(2));
-            report.setText(resultSet.getString(3));
-            report.setSpeakerId(resultSet.getInt(4));
+            report.setId(resultSet.getInt("id"));
+            report.setName(resultSet.getString("name"));
+            report.setText(resultSet.getString("text"));
+            report.setSpeakerId(resultSet.getInt("speaker_id"));
+            report.setConferenceID(resultSet.getInt("conference_id"));
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return report;
     }
@@ -105,7 +109,7 @@ public class ReportDao extends AbstractDao<Report> {
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }

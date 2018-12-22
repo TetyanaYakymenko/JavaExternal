@@ -2,6 +2,9 @@ package ua.com.finalProject.persistence.dao;
 
 import ua.com.finalProject.persistence.entities.User;
 
+import org.apache.log4j.Logger;
+
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao extends AbstractDao<User> {
+    private static final Logger log = Logger.getLogger(UserDao.class);
 
     public UserDao(Connection connection) {
         super(connection);
@@ -26,7 +30,7 @@ public class UserDao extends AbstractDao<User> {
             }
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return resultingItems;
     }
@@ -41,7 +45,24 @@ public class UserDao extends AbstractDao<User> {
             user = createAndGet(resultSet);
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
+        }
+        return user;
+    }
+
+    public User getByLoginPassword(String login, String password) {
+        User user = new User();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select * from user where login = ? and password = ?");
+            statement.setString(1, login);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            user = createAndGet(resultSet);
+            statement.close();
+        } catch (SQLException e) {
+            log.error(e.getMessage());
         }
         return user;
     }
@@ -55,7 +76,7 @@ public class UserDao extends AbstractDao<User> {
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }
@@ -79,29 +100,45 @@ public class UserDao extends AbstractDao<User> {
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }
 
     @Override
     public User createAndGet(ResultSet resultSet) {
+
         User user = null;
         try {
-            user = new User();
-            user.setId(resultSet.getInt(1));
-            user.setSurname(resultSet.getString(2));
-            user.setName(resultSet.getString(3));
-            user.setLogin(resultSet.getString(4));
-            user.setPassword(resultSet.getString(5));
-            user.setEmail(resultSet.getString(6));
-            user.setPhone(resultSet.getString(7));
-            user.setRolesId(resultSet.getInt(8));
-            user.setRating(resultSet.getInt(9));
-            user.setSalary(resultSet.getBigDecimal(10));
+            if (resultSet.next()) {
+                user = new User();
+
+                user.setId(resultSet.getInt("id"));
+                user.setSurname(resultSet.getString("surname"));
+                user.setName(resultSet.getString("name"));
+                user.setLogin(resultSet.getString("login"));
+                user.setPassword(resultSet.getString("password"));
+                user.setEmail(resultSet.getString("email"));
+                user.setPhone(resultSet.getString("phone"));
+                user.setRolesId(resultSet.getInt("role_id"));
+
+                String ratingString =resultSet.getString("rating");
+                int rating = 0;
+                if(ratingString != null){
+                    rating = Integer.parseInt(ratingString);
+                }
+
+                user.setRating(rating);
+                String salaryString =resultSet.getString("salary");
+                BigDecimal salary = null;
+                if(salaryString != null){
+                    salary = BigDecimal.valueOf(Long.parseLong(salaryString,10));
+                }
+                user.setSalary(salary);
+            }
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return user;
     }
@@ -125,7 +162,7 @@ public class UserDao extends AbstractDao<User> {
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }

@@ -2,6 +2,8 @@ package ua.com.finalProject.persistence.dao;
 
 import ua.com.finalProject.persistence.entities.Role;
 
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoleDao extends AbstractDao<Role> {
+    private static final Logger log = Logger.getLogger(RoleDao.class);
+
     public RoleDao(Connection connection) {
         super(connection);
     }
@@ -25,7 +29,7 @@ public class RoleDao extends AbstractDao<Role> {
             }
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return resultingItems;
     }
@@ -40,7 +44,7 @@ public class RoleDao extends AbstractDao<Role> {
             role = createAndGet(resultSet);
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return role;
     }
@@ -54,7 +58,7 @@ public class RoleDao extends AbstractDao<Role> {
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }
@@ -70,7 +74,7 @@ public class RoleDao extends AbstractDao<Role> {
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }
@@ -80,10 +84,10 @@ public class RoleDao extends AbstractDao<Role> {
         Role role = null;
         try {
             role = new Role();
-            role.setId(resultSet.getInt(1));
-            role.setRoleName(resultSet.getString(2));
+            role.setId(resultSet.getInt("id"));
+            role.setRoleName(resultSet.getString("role_name"));
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return role;
     }
@@ -98,7 +102,7 @@ public class RoleDao extends AbstractDao<Role> {
             statement.setInt(2, entity.getId());
             statement.close();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
         return changeNumber > 0;
     }

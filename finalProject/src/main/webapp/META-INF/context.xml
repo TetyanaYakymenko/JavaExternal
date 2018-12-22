@@ -6,7 +6,7 @@
          -->
 
     <!-- maxIdle: Maximum number of idle database connections to retain in pool.
-         Set to -1 for no limit.  See also the DBCP documentation on this
+         Set to -1 for no limit.  See also the DBCP 2 documentation on this
          and the minEvictableIdleTimeMillis configuration parameter.
          -->
 
@@ -25,9 +25,18 @@
     <!-- url: The JDBC connection url for connecting to your MySQL database.
          -->
 
-    <Resource name="jdbc/control_conferences" auth="Container" type="javax.sql.DataSource"
-              maxTotal="100" maxIdle="30" maxWaitMillis="10000"
-              username="root" password="root" driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc:mysql://localhost:3306/control_conferences?characterEncoding=utf8"/>
+    <Resource name="control_conferences"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxTotal="100"
+              maxIdle="30"
+              maxWaitMillis="10000"
+              username="root"
+              password="root"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;
+                                    org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/control_conferences"/>
 
 </Context>
