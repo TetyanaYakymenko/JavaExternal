@@ -26,10 +26,6 @@
            ${nullPage}
             <br/>
             <div>
-                <input type = "hidden" name = "command"  value = "login" />
-            <button type="submit" class="btn btn-primary">Login in</button>
-            </div>
-            <div>
                 <input type = "hidden" name = "command"  value = "register" />
                 <button type="submit" class="btn btn-primary">Register</button>
             </div>

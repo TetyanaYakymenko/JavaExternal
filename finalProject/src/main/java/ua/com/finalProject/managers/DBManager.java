@@ -22,7 +22,7 @@ public class DBManager {
         }
     }
 
-    // класс извлекает информацию из файла config.properties
+    // класс извлекает информацию из файла db_connection.properties
     private DBManager() {
     }
 

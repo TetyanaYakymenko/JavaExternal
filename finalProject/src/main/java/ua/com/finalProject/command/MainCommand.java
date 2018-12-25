@@ -12,6 +12,7 @@ public class MainCommand implements ActionCommand {
     public String execute(HttpServletRequest request) {
         List<Conference> conferences = LoginLogic.getConferences();
         request. setAttribute("conferences", conferences);
+
         String page = ConfigurationManager.getProperty("path.page.main"); //вызов страницы ответа на запрос
         return page;
     }
