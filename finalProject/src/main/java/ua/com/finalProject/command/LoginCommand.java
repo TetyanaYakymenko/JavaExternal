@@ -31,7 +31,7 @@ public class LoginCommand implements ActionCommand {
 // проверка логина и пароля
         User user = LoginLogic.getUserbyLoginAndPassword(login, pass);
         if (user != null) {
-            if (user.getRolesId() == 2){
+            if (user.getRolesId() == 1){
                 request.getSession().setAttribute(PARAM_NAME_ROLE, "admin");
                 List<User> users = LoginLogic.getUsers();
                 request. setAttribute(PARAM_NAME_USERS, users);
