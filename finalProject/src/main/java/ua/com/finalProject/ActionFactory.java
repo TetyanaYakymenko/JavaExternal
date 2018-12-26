@@ -2,7 +2,7 @@ package ua.com.finalProject;
 
 import ua.com.finalProject.managers.MessageManager;
 import ua.com.finalProject.command.ActionCommand;
-import ua.com.finalProject.command.client.CommandEnum;
+import ua.com.finalProject.command.enums.CommandEnum;
 import ua.com.finalProject.command.EmptyCommand;
 
 import javax.servlet.http.HttpServletRequest;

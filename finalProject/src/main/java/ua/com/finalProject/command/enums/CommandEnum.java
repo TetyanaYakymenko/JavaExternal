@@ -1,4 +1,4 @@
-package ua.com.finalProject.command.client;
+package ua.com.finalProject.command.enums;
 
 import ua.com.finalProject.command.*;
 
@@ -27,12 +27,21 @@ public enum CommandEnum {
         {
             this.command = new EditCommand();
         }
-    }
-    ;
+    },
+    LANGUAGE {
+        {
+            this.command = new LanguageCommand();
+        }
+    },
+    REGISTER {
+        {
+            this.command = new RegisterCommand();
+        }
+    };
     ActionCommand command;
 
     public ActionCommand getCurrentCommand() {
         return command;
     }
-    }
+}
 

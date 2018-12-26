@@ -11,7 +11,7 @@ public class AdminCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         List<User> users = LoginLogic.getUsers();
-        request. setAttribute("users", users);
+        request.setAttribute("users", users);
         return ConfigurationManager.getProperty("path.page.admin");
     }
 }

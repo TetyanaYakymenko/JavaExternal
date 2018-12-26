@@ -1,5 +1,6 @@
 package ua.com.finalProject.servlet;
 
+import ua.com.finalProject.command.LanguageCommand;
 import ua.com.finalProject.managers.ConfigurationManager;
 import ua.com.finalProject.managers.MessageManager;
 import ua.com.finalProject.ActionFactory;
@@ -30,14 +31,11 @@ public class ControllerServlet extends HttpServlet {
                                 HttpServletResponse response)
             throws ServletException, IOException {
         String page = null;
-// определение команды, пришедшей из JSP
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
-        /*
-         * вызов реализованного метода execute() и передача параметров
-         * классу-обработчику конкретной команды
-         */
+
         page = command.execute(request);
+
 // метод возвращает страницу ответа
 // page = null; // поэксперементировать!
         if (page != null) {
@@ -46,10 +44,13 @@ public class ControllerServlet extends HttpServlet {
             dispatcher.forward(request, response);
         } else {
 // установка страницы c cообщением об ошибке
-            page = ConfigurationManager.getProperty("path.page.index");
+            page = ConfigurationManager.getProperty("path.page.error");
             request.getSession().setAttribute("nullPage",
                     MessageManager.getProperty("message.nullpage"));
-            response.sendRedirect(request.getContextPath() + page +"/");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+// вызов страницы ответа на запрос
+            dispatcher.forward(request, response);
+            ;
         }
     }
 }
