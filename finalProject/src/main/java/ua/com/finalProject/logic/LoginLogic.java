@@ -2,6 +2,7 @@ package ua.com.finalProject.logic;
 
 import org.apache.log4j.Logger;
 
+import ua.com.finalProject.displaymodel.ReportDisplay;
 import ua.com.finalProject.persistence.ConnectionPool;
 import ua.com.finalProject.persistence.dao.ConferenceDao;
 import ua.com.finalProject.persistence.dao.ReportDao;
@@ -12,7 +13,9 @@ import ua.com.finalProject.persistence.entities.User;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class LoginLogic {
     private static final Logger log = Logger.getLogger(LoginLogic.class);
@@ -32,6 +35,34 @@ public class LoginLogic {
         }
 
         return user;
+    }
+
+    public static List<ReportDisplay> getReportsDisplay() {
+        List<Report> reports = new ArrayList<>();
+        final List<Conference> cons;
+        final List<User> users;
+        List<ReportDisplay> result = new ArrayList<>();
+
+        try {
+            Connection connection = getConnection();
+
+            ReportDao reportDao = new ReportDao(connection);
+            reports = reportDao.getAll();
+
+            ConferenceDao conferenceDao = new ConferenceDao(connection);
+            cons = conferenceDao.getAll();
+
+            UserDao userDao = new UserDao(connection);
+            users = userDao.getAll();
+
+            reports.stream().forEach(report1 -> result.add(new ReportDisplay(report1, cons, users)));
+
+            commitAndCloseConnection(connection);
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+
+        return result;
     }
 //
 

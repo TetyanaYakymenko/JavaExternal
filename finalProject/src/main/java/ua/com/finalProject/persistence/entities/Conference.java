@@ -1,6 +1,7 @@
 package ua.com.finalProject.persistence.entities;
 
 import java.util.GregorianCalendar;
+import java.util.stream.Stream;
 
 public class Conference extends Entity {
 
@@ -81,8 +82,11 @@ public class Conference extends Entity {
         return result;
     }
 
-    @Override
+
+@Override
     public String toString() {
+    /*Stream.Builder<String> builder = Stream.builder().;
+    Stream<String> streamFromBuilder = builder.add("a1").add("a2").add("a3").build();*/
         final StringBuffer sb = new StringBuffer("Conferece[");
         sb.append("id=").append(id).append("\n");
         sb.append("name=").append(name).append("\n");

@@ -12,8 +12,8 @@
     <div class="card-header bg-light">
         <ul class="nav nav-pills card-header-pills text-primary">
             <li class="nav-item" >
-                <form name = "Logout"  method = "POST" action = "main" >
-                    <input type = "hidden" name = "command"  value = "main" />
+                <form name = "Reports"  method = "POST" action = "main" >
+                    <input type = "hidden" name = "command"  value = "reports" />
                     <button type="submit" class="btn btn-primary"><fmt:message key="head_home"/></button>
                 </form>
               </li>

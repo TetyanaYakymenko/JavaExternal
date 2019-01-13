@@ -23,7 +23,7 @@ public class UserDao extends AbstractDao<User> {
     public List<User> getAll() {
         List<User> resultingItems = new ArrayList<User>();
         try {
-            PreparedStatement statement = connection.prepareStatement("select * from user order by name ASC;");
+            PreparedStatement statement = connection.prepareStatement("select * from user;");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 resultingItems.add(createAndGet(resultSet));

@@ -44,6 +44,11 @@
                         <input type="hidden" name="command" value="edit">
                         <button type="submit" class="btn btn-primary"><fmt:message key="admin_edit"/></button>
                     </form>
+                    <form method="POST" action="main">
+                        <input type="hidden" name="user" value="${u}">
+                        <input type="hidden" name="command" value="mail">
+                        <button type="submit" class="btn btn-primary"><fmt:message key="admin_mail"/></button>
+                    </form>
                     </td>
                 </tr>
         </c:forEach>

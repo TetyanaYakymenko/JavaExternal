@@ -37,9 +37,9 @@ public class LoginCommand implements ActionCommand {
                 request. setAttribute(PARAM_NAME_USERS, users);
                 page = ConfigurationManager.getProperty(ADMIN_PAGE);
             } else {
-                page = ConfigurationManager.getProperty(MAIN_PAGE);
-                List<Conference> conferences = LoginLogic.getConferences();
-                request. setAttribute(PARAM_NAME_CONFERENCES, conferences);
+               ReportsCommand reportsCommand = new ReportsCommand();
+               return reportsCommand.execute(request);
+
             }
             request.getSession().setAttribute(PARAM_NAME_LOGIN, login);
             request.getSession().setAttribute(PARAM_NAME_PASSWORD, pass);

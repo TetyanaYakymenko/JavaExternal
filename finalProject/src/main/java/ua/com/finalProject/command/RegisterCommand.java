@@ -15,7 +15,7 @@ public class RegisterCommand implements ActionCommand {
         String name = request.getParameter(PARAM_NAME);
 
         if (name != null) {
-            //TODO WORk WIRH DB
+            //TODO WORK WITH DB
             page = ConfigurationManager.getProperty(MAIN_PAGE);
         } else {
             page = ConfigurationManager.getProperty(REGISTRATION_PAGE);

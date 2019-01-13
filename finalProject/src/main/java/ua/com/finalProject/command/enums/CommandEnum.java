@@ -37,6 +37,16 @@ public enum CommandEnum {
         {
             this.command = new RegisterCommand();
         }
+    },
+    MAIL {
+        {
+            this.command = new EmailCommand();
+        }
+    },
+    REPORTS {
+        {
+            this.command = new ReportsCommand();
+        }
     };
     ActionCommand command;
 

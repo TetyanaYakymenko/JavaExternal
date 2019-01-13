@@ -33,8 +33,8 @@ public class ControllerServlet extends HttpServlet {
         String page = null;
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
-
         page = command.execute(request);
+
 
 // метод возвращает страницу ответа
 // page = null; // поэксперементировать!

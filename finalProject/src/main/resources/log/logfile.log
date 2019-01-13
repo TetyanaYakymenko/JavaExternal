@@ -1,1 +1,15 @@
 2018-12-25 15:15:09 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.client.CommandEnum.LANGUAGE
+2019-01-12 00:03:04 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.enums.CommandEnum.MAIL
+2019-01-12 00:26:07 ERROR LoginLogic:40 - javax.mail.AuthenticationFailedException: failed to connect, no password specified?
+2019-01-12 00:53:02 ERROR LoginLogic:49 - javax.mail.MessagingException: Could not convert socket to TLS;
+  nested exception is:
+	javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+2019-01-12 01:15:23 ERROR LoginLogic:50 - javax.mail.MessagingException: Could not convert socket to TLS;
+  nested exception is:
+	javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+2019-01-13 13:11:49 ERROR LoginLogic:50 - javax.mail.MessagingException: Could not convert socket to TLS;
+  nested exception is:
+	javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+2019-01-13 15:02:31 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.enums.CommandEnum.REPORTS
+2019-01-13 15:03:28 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.enums.CommandEnum.REPORTS
+2019-01-13 15:05:18 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.enums.CommandEnum.REPORTS
