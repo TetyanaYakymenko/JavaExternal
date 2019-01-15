@@ -1,7 +1,7 @@
 package ua.com.finalProject.command;
 
 import org.apache.log4j.Logger;
-import ua.com.finalProject.logic.LoginLogic;
+import ua.com.finalProject.logic.Logic;
 
 import java.util.Properties;
 import javax.mail.*;
@@ -11,7 +11,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 public class EmailCommand implements ActionCommand {
-    private static final Logger log = Logger.getLogger(LoginLogic.class);
+    private static final Logger log = Logger.getLogger(Logic.class);
     @Override
     public String execute(HttpServletRequest request) {
         Properties props = new Properties();

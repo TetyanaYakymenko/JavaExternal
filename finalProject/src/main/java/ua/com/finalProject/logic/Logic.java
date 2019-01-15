@@ -12,13 +12,14 @@ import ua.com.finalProject.persistence.entities.Report;
 import ua.com.finalProject.persistence.entities.User;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class LoginLogic {
-    private static final Logger log = Logger.getLogger(LoginLogic.class);
+public class Logic {
+    private static final Logger log = Logger.getLogger(Logic.class);
     private static ConnectionPool connectionPool = ConnectionPool.getInstance();
 
     public static User getUserbyLoginAndPassword(String enterLogin, String enterPass) {
@@ -97,6 +98,44 @@ public class LoginLogic {
         }
 
         return users;
+    }
+    public static User getUserByLogin(String login){
+        User user = null;
+        try {
+            Connection connection = getConnection();
+
+            UserDao userDao = new UserDao(connection);
+            user = userDao.getByLogin(login);
+
+            commitAndCloseConnection(connection);
+
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+        return user;
+    }
+    public static void AddUser(User user){
+        try {
+            Connection connection = getConnection();
+
+            UserDao userDao = new UserDao(connection);
+
+            PreparedStatement statement = connection.prepareStatement("select max(id) from user; ");
+            int id =1;
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                id += resultSet.getInt(1);
+            }
+            user.setId(id);
+            user.setRolesId(4);
+            userDao.create(user);
+
+            commitAndCloseConnection(connection);
+
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+
     }
 
     private static Connection getConnection() throws SQLException {

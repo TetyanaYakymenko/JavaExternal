@@ -20,7 +20,7 @@ public class ConferenceDao extends AbstractDao<Conference> {
     public List<Conference> getAll() {
         List<Conference> resultingItems = new ArrayList<Conference>();
         try {
-            PreparedStatement statement = connection.prepareStatement("select * from conference order by name ASC;");
+            PreparedStatement statement = connection.prepareStatement("select * from conference order by id ASC;");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 resultingItems.add(createAndGet(resultSet));
@@ -39,7 +39,9 @@ public class ConferenceDao extends AbstractDao<Conference> {
             PreparedStatement statement = connection.prepareStatement("select * from conference where id = ?");
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-            conference = createAndGet(resultSet);
+            if(resultSet.next()){
+                conference = createAndGet(resultSet);
+            }
             statement.close();
         } catch (SQLException e) {
             log.error(e.getMessage());

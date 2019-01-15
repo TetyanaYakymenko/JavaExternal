@@ -13,12 +13,12 @@
 
             <div class="form-group mx-auto ">
                 <label for="login" style="width: 100px;">Login:</label>
-                <input type = "text" style="width: 300px;" placeholder="login" id="login" required="required" name = "login" value ="${login}" />
+                <input type = "text" style="width: 300px;"  id="login" required="required" name = "login" value ="" />
                 <br/>
             </div>
             <div class="form-group mx-auto">
                 <label for="login" style="width: 100px;">Password :</label>
-                <input type = "password"  style="width: 300px;" name = "password"  required="required" placeholder="Password" value ="${password}" />
+                <input type = "password"  style="width: 300px;"  name = "password" required="required"  value ="" />
                 <br/>
             </div>
             <div class="form-group mx-auto ">

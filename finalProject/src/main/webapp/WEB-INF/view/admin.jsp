@@ -26,6 +26,7 @@
                 <td><fmt:message key="admin_table_rating"/></td>
                 <td><fmt:message key="admin_table_salary"/></td>
                 <td></td>
+                <td></td>
             </tr>
         </thead>
         <c:forEach var="u" items="${users}">
@@ -40,12 +41,14 @@
                     <td> ${u.salary}</td>
                     <td>
                     <form method="POST" action="main">
-                        <input type="hidden" name="user" value="${u}">
-                        <input type="hidden" name="command" value="edit">
+                        <input type="hidden" name="userId" value="${u.id}">
+                        <input type="hidden" name="command" value="edituser">
                         <button type="submit" class="btn btn-primary"><fmt:message key="admin_edit"/></button>
                     </form>
+                    </td>
+                    <td>
                     <form method="POST" action="main">
-                        <input type="hidden" name="user" value="${u}">
+                        <input type="hidden" name="userId" value="${u.id}">
                         <input type="hidden" name="command" value="mail">
                         <button type="submit" class="btn btn-primary"><fmt:message key="admin_mail"/></button>
                     </form>

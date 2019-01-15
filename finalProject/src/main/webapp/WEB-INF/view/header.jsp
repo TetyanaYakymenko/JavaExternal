@@ -17,13 +17,8 @@
                     <button type="submit" class="btn btn-primary"><fmt:message key="head_home"/></button>
                 </form>
               </li>
-            <li class="nav-item">
-                 <form name = "Logout"  method = "POST" action = ""  >
-                    <input type = "hidden" name = "command"  value = "logout" />
-                    <button type="submit" class="btn btn-primary"><fmt:message key="head_logout"/></button>
-                  </form>
-              </li>
-            <c:if test="${sessionScope.role != null}">
+
+            <c:if test="${sessionScope.role == 'admin'}">
                 <li class="nav-item">
                     <form name = "Admin panel"  method = "POST" action = ""  >
                         <input type = "hidden" name = "command"  value = "admin" />
@@ -32,6 +27,21 @@
                     </form>
                 </li>
             </c:if>
+            <c:if test="${sessionScope.role == 'speaker'}">
+                <li class="nav-item">
+                    <form name = "Admin panel"  method = "POST" action = ""  >
+                        <input type = "hidden" name = "command"  value = "addreport" />
+                        <button type="submit" class="btn btn-primary"><fmt:message key="head_add_report"/>
+                        </button>
+                    </form>
+                </li>
+            </c:if>
+            <li class="nav-item">
+                <form name = "Logout"  method = "POST" action = ""  >
+                    <input type = "hidden" name = "command"  value = "logout" />
+                    <button type="submit" class="btn btn-primary"><fmt:message key="head_logout"/></button>
+                </form>
+            </li>
         </ul>
     </div>
 

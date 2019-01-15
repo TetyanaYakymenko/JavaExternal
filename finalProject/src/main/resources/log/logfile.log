@@ -13,3 +13,39 @@
 2019-01-13 15:02:31 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.enums.CommandEnum.REPORTS
 2019-01-13 15:03:28 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.enums.CommandEnum.REPORTS
 2019-01-13 15:05:18 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.enums.CommandEnum.REPORTS
+2019-01-13 18:18:46 ERROR Logic:130 - Before start of result set
+2019-01-13 18:21:50 ERROR Logic:130 - Before start of result set
+2019-01-14 03:43:03 ERROR Logic:131 - Before start of result set
+2019-01-15 13:21:44 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.enums.CommandEnum.EDIT
+2019-01-15 13:24:01 ERROR UserDao:173 - Before start of result set
+2019-01-15 13:24:12 ERROR UserDao:173 - Before start of result set
+2019-01-15 13:24:21 ERROR UserDao:173 - Before start of result set
+2019-01-15 13:28:52 ERROR UserDao:173 - Before start of result set
+2019-01-15 13:34:14 ERROR UserDao:173 - Before start of result set
+2019-01-15 13:50:10 ERROR UserDao:173 - Before start of result set
+2019-01-15 13:57:48 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.enums.CommandEnum.EDIT
+2019-01-15 13:58:02 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.enums.CommandEnum.EDIT
+2019-01-15 13:59:54 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.enums.CommandEnum.EDIT
+2019-01-15 14:32:23 ERROR ActionFactory:27 - No enum constant ua.com.finalProject.command.enums.CommandEnum.EDIT
+2019-01-15 14:33:51 ERROR UserDao:198 - Unknown column 'roles_id' in 'field list'
+2019-01-15 14:33:57 ERROR UserDao:198 - Unknown column 'roles_id' in 'field list'
+2019-01-15 14:34:06 ERROR UserDao:198 - Unknown column 'roles_id' in 'field list'
+2019-01-15 14:35:42 ERROR UserDao:198 - Unknown column 'roles_id' in 'field list'
+2019-01-15 14:38:21 ERROR UserDao:198 - Unknown column 'roles_id' in 'field list'
+2019-01-15 14:38:23 ERROR UserDao:198 - Unknown column 'roles_id' in 'field list'
+2019-01-15 14:41:04 ERROR UserDao:198 - Unknown column 'roles_id' in 'field list'
+2019-01-15 14:42:47 ERROR UserDao:198 - Unknown column 'roles_id' in 'field list'
+2019-01-15 14:43:42 ERROR UserDao:198 - Unknown column 'roles_id' in 'field list'
+2019-01-15 14:44:25 ERROR UserDao:198 - Column 'password' cannot be null
+2019-01-15 14:47:25 ERROR UserDao:198 - Cannot add or update a child row: a foreign key constraint fails (`control_conferences`.`user`, CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+2019-01-15 14:56:43 ERROR UserDao:174 - Illegal operation on empty result set.
+2019-01-15 14:58:55 ERROR UserDao:174 - Illegal operation on empty result set.
+2019-01-15 16:05:52 ERROR UserDao:139 - Unknown column 'roles_id' in 'field list'
+2019-01-15 16:13:02 ERROR UserDao:139 - Unknown column 'roles_id' in 'field list'
+2019-01-15 16:15:54 ERROR UserDao:138 - No value specified for parameter 10
+2019-01-15 16:16:46 ERROR UserDao:138 - Field 'role_id' doesn't have a default value
+2019-01-15 17:57:30 ERROR EditReportCommand:44 - java.text.ParseException: Unparseable date: ""
+2019-01-15 17:57:30 ERROR ReportDao:112 - Unknown column 'spearer_id' in 'field list'
+2019-01-15 17:57:54 ERROR EditReportCommand:44 - java.text.ParseException: Unparseable date: ""
+2019-01-15 17:57:54 ERROR ReportDao:112 - Unknown column 'spearer_id' in 'field list'
+2019-01-15 18:00:48 ERROR ReportDao:112 - Unknown column 'spearer_id' in 'field list'

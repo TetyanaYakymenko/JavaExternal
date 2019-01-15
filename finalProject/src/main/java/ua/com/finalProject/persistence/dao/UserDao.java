@@ -19,11 +19,30 @@ public class UserDao extends AbstractDao<User> {
         super(connection);
     }
 
-    @Override
-    public List<User> getAll() {
+
+    public List<User> getAll( int from, int countRow) {
         List<User> resultingItems = new ArrayList<User>();
         try {
-            PreparedStatement statement = connection.prepareStatement("select * from user;");
+            String sql = "select * from user Order by id LIMIT %d OFFSET %d";
+            sql = String.format(sql, from, countRow);
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                resultingItems.add(createAndGet(resultSet));
+            }
+            statement.close();
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+        return resultingItems;
+    }
+
+    @Override
+    public List<User> getAll(){
+        List<User> resultingItems = new ArrayList<User>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select * from user order by id ASC");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 resultingItems.add(createAndGet(resultSet));
@@ -42,6 +61,21 @@ public class UserDao extends AbstractDao<User> {
             PreparedStatement statement = connection.prepareStatement("select * from user where id = ?");
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                user = createAndGet(resultSet);
+            }
+            statement.close();
+        } catch (SQLException e) {
+            log.error(e.getMessage());
+        }
+        return user;
+    }
+    public User getByLogin(String login) {
+        User user = new User();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select * from user where login = ?");
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
             user = createAndGet(resultSet);
             statement.close();
         } catch (SQLException e) {
@@ -53,13 +87,14 @@ public class UserDao extends AbstractDao<User> {
     public User getByLoginPassword(String login, String password) {
         User user = new User();
         try {
-            PreparedStatement statement = connection.prepareStatement("select * from user where login = ? and password = ?");
+            PreparedStatement statement = connection.prepareStatement("select * from user where login = ? and password = ? ");
             statement.setString(1, login);
             statement.setString(2, password);
 
             ResultSet resultSet = statement.executeQuery();
-
-            user = createAndGet(resultSet);
+            if(resultSet.next()){
+                user = createAndGet(resultSet);
+            }
             statement.close();
         } catch (SQLException e) {
             log.error(e.getMessage());
@@ -85,7 +120,7 @@ public class UserDao extends AbstractDao<User> {
     public boolean create(User entity) {
         int changeNumber = 0;
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO user(id, surname, name, login, password, email, phone, roles_id, rating, salary) VALUES(?,?,?,?,?,?,?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO user(id, surname, name, login, password, email, phone, role_id, rating, salary) VALUES(?,?,?,?,?,?,?,?,?,?)");
 
             statement.setInt(1, entity.getId());
             statement.setString(2, entity.getSurname());
@@ -97,6 +132,7 @@ public class UserDao extends AbstractDao<User> {
             statement.setInt(8, entity.getRolesId());
             statement.setInt(9, entity.getRating());
             statement.setBigDecimal(10, entity.getSalary());
+
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
@@ -110,7 +146,6 @@ public class UserDao extends AbstractDao<User> {
 
         User user = null;
         try {
-            if (resultSet.next()) {
                 user = new User();
 
                 user.setId(resultSet.getInt("id"));
@@ -135,7 +170,6 @@ public class UserDao extends AbstractDao<User> {
                     salary = BigDecimal.valueOf(Long.parseLong(salaryString,10));
                 }
                 user.setSalary(salary);
-            }
 
         } catch (SQLException e) {
             log.error(e.getMessage());
@@ -148,17 +182,16 @@ public class UserDao extends AbstractDao<User> {
         int changeNumber = 0;
         try {
             PreparedStatement statement = connection.prepareStatement("update user SET surname = ?, name = ?, login = ?, " +
-                    "password = ?, email =?,phone = ?, roles_id = ?, rating = ?, salary = ?  WHERE id = ?; ");
+                    "password = ?, email =?,phone = ?, rating = ?, salary = ?  WHERE id = ?; ");
             statement.setString(1, entity.getSurname());
             statement.setString(2, entity.getName());
             statement.setString(3, entity.getLogin());
             statement.setString(4, entity.getPassword());
             statement.setString(5, entity.getEmail());
-            statement.setString(6, entity.getPhone());
-            statement.setInt(7, entity.getRolesId());
-            statement.setInt(8, entity.getRating());
-            statement.setBigDecimal(9, entity.getSalary());
-            statement.setInt(10, entity.getId());
+            statement.setString(6, entity.getPhone());;
+            statement.setInt(7, entity.getRating());
+            statement.setBigDecimal(8, entity.getSalary());
+            statement.setInt(9, entity.getId());
             changeNumber = statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {

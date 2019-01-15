@@ -23,9 +23,19 @@ public enum CommandEnum {
             this.command = new AdminCommand();
         }
     },
-    EDIT {
+    EDITREPORT {
         {
-            this.command = new EditCommand();
+            this.command = new EditReportCommand();
+        }
+    },
+    EDITUSER {
+        {
+            this.command = new EditUserCommand();
+        }
+    },
+    ADDREPORT{
+        {
+            this.command = new AddReportCommand();
         }
     },
     LANGUAGE {

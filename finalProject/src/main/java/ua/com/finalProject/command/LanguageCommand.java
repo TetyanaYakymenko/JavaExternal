@@ -11,7 +11,6 @@ public class LanguageCommand implements ActionCommand {
         String local = request.getParameter("locale");
         System.out.println("local=" + local);
         HttpSession session = request.getSession();
-        //request.setAttribute("locale", local);
         session.setAttribute("locale", local);
 
         String page = ConfigurationManager.getProperty("path.page.login");

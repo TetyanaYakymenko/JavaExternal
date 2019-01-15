@@ -22,7 +22,7 @@ public class ReportDao extends AbstractDao<Report> {
     public List<Report> getAll() {
         List<Report> resultingItems = new ArrayList<Report>();
         try {
-            PreparedStatement statement = connection.prepareStatement("select * from report order by name ASC;");
+            PreparedStatement statement = connection.prepareStatement("select * from report order by id ASC;");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 resultingItems.add(createAndGet(resultSet));
@@ -101,7 +101,7 @@ public class ReportDao extends AbstractDao<Report> {
     public boolean update(Report entity) {
         int changeNumber = 0;
         try {
-            PreparedStatement statement = connection.prepareStatement("update report SET name = ?, text = ?, spearer_id = ? WHERE id = ?; ");
+            PreparedStatement statement = connection.prepareStatement("update report SET name = ?, text = ?, speaker_id = ? WHERE id = ?; ");
             statement.setString(1, entity.getName());
             statement.setString(2, entity.getText());
             statement.setInt(3, entity.getSpeakerId());

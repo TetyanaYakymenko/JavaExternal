@@ -1,10 +1,8 @@
 package ua.com.finalProject.command;
 
-import ua.com.finalProject.RoleEnum;
+import ua.com.finalProject.logic.Logic;
 import ua.com.finalProject.managers.ConfigurationManager;
 import ua.com.finalProject.managers.MessageManager;
-import ua.com.finalProject.logic.LoginLogic;
-import ua.com.finalProject.persistence.entities.Conference;
 import ua.com.finalProject.persistence.entities.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,17 +27,26 @@ public class LoginCommand implements ActionCommand {
         String pass = request.getParameter(PARAM_NAME_PASSWORD);
 
 // проверка логина и пароля
-        User user = LoginLogic.getUserbyLoginAndPassword(login, pass);
+        User user = Logic.getUserbyLoginAndPassword(login, pass);
+        ReportsCommand reportsCommand = null;
         if (user != null) {
-            if (user.getRolesId() == 1){
-                request.getSession().setAttribute(PARAM_NAME_ROLE, "admin");
-                List<User> users = LoginLogic.getUsers();
-                request. setAttribute(PARAM_NAME_USERS, users);
-                page = ConfigurationManager.getProperty(ADMIN_PAGE);
-            } else {
-               ReportsCommand reportsCommand = new ReportsCommand();
-               return reportsCommand.execute(request);
-
+            switch (user.getRolesId()) {
+                case 1:
+                    request.getSession().setAttribute(PARAM_NAME_ROLE, "admin");
+                    List<User> users = Logic.getUsers();
+                    request.setAttribute(PARAM_NAME_USERS, users);
+                    page = ConfigurationManager.getProperty(ADMIN_PAGE);
+                    break;
+                case 2:
+                    request.getSession().setAttribute(PARAM_NAME_ROLE, "moderator");
+                    reportsCommand = new ReportsCommand();
+                    return reportsCommand.execute(request);
+                case 3:
+                    request.getSession().setAttribute(PARAM_NAME_ROLE, "speaker");
+                    break;
+                default:
+                     reportsCommand = new ReportsCommand();
+                    return reportsCommand.execute(request);
             }
             request.getSession().setAttribute(PARAM_NAME_LOGIN, login);
             request.getSession().setAttribute(PARAM_NAME_PASSWORD, pass);

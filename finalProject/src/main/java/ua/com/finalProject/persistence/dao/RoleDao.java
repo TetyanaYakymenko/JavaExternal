@@ -22,7 +22,7 @@ public class RoleDao extends AbstractDao<Role> {
     public List<Role> getAll() {
         List<Role> resultingItems = new ArrayList<Role>();
         try {
-            PreparedStatement statement = connection.prepareStatement("select * from role order by name ASC;");
+            PreparedStatement statement = connection.prepareStatement("select * from role order by id ASC;");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 resultingItems.add(createAndGet(resultSet));
@@ -41,7 +41,9 @@ public class RoleDao extends AbstractDao<Role> {
             PreparedStatement statement = connection.prepareStatement("select * from role where id = ?");
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
-            role = createAndGet(resultSet);
+            if(resultSet.next()){
+                role = createAndGet(resultSet);
+            }
             statement.close();
         } catch (SQLException e) {
             log.error(e.getMessage());
@@ -97,7 +99,6 @@ public class RoleDao extends AbstractDao<Role> {
         int changeNumber = 0;
         try {
             PreparedStatement statement = connection.prepareStatement("update role SET role_name = ? WHERE id = ?; ");
-
             statement.setString(1, entity.getRoleName());
             statement.setInt(2, entity.getId());
             statement.close();
