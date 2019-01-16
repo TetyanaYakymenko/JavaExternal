@@ -49,3 +49,20 @@
 2019-01-15 17:57:54 ERROR EditReportCommand:44 - java.text.ParseException: Unparseable date: ""
 2019-01-15 17:57:54 ERROR ReportDao:112 - Unknown column 'spearer_id' in 'field list'
 2019-01-15 18:00:48 ERROR ReportDao:112 - Unknown column 'spearer_id' in 'field list'
+2019-01-15 20:40:38 ERROR EditReportCommand:44 - java.text.ParseException: Unparseable date: "2019-01-15"
+2019-01-15 20:42:23 ERROR EditReportCommand:44 - java.text.ParseException: Unparseable date: "2019-01-19"
+2019-01-15 20:52:18 ERROR Logic:50 - javax.mail.MessagingException: Could not convert socket to TLS;
+  nested exception is:
+	javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+2019-01-15 20:56:50 ERROR Logic:50 - javax.mail.MessagingException: Could not convert socket to TLS;
+  nested exception is:
+	javax.net.ssl.SSLHandshakeException: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+2019-01-15 21:01:05 ERROR Logic:51 - javax.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials m10-v6sm712149ljj.34 - gsmtp
+
+2019-01-15 21:10:37 ERROR Logic:51 - javax.mail.AuthenticationFailedException: 534-5.7.9 Application-specific password required. Learn more at
+534 5.7.9  https://support.google.com/mail/?p=InvalidSecondFactor v12sm56255620wmd.27 - gsmtp
+
+2019-01-15 21:12:16 ERROR Logic:51 - javax.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials v6sm27081955wrd.88 - gsmtp
+

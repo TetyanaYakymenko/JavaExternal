@@ -22,7 +22,7 @@ public class ConfigurationManager {
         }
     }
 
-    // класс извлекает информацию из файла config.properties
+
     private ConfigurationManager() {
     }
 

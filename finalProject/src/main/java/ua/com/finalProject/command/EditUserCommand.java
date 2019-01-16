@@ -1,8 +1,7 @@
 package ua.com.finalProject.command;
 
 import org.apache.log4j.Logger;
-import ua.com.finalProject.displaymodel.ReportDisplay;
-import ua.com.finalProject.logic.Logic;
+import ua.com.finalProject.logic.UserService;
 import ua.com.finalProject.managers.ConfigurationManager;
 import ua.com.finalProject.managers.MessageManager;
 import ua.com.finalProject.persistence.ConnectionPool;
@@ -28,7 +27,7 @@ public class EditUserCommand implements ActionCommand {
         User user = null;
         try {
             if (name == null) {
-                user = getUserById(currentUserId);
+                user = UserService.getUserById(currentUserId);
 
             } else {
                 user = updateUser(request);
@@ -44,21 +43,6 @@ public class EditUserCommand implements ActionCommand {
         String page = ConfigurationManager.getProperty("path.page.edit.user");
         return page;
 
-    }
-
-    private User getUserById(String id) throws SQLException {
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        User user = null;
-        Connection connection = connectionPool.getConnection();
-        connection.setAutoCommit(false);
-
-        UserDao userDao = new UserDao(connection);
-        user = userDao.getById(Integer.valueOf(id));
-
-        connection.commit();
-        connectionPool.closeConnection(connection);
-
-        return user;
     }
 
     private User updateUser(HttpServletRequest request) throws SQLException {
@@ -82,7 +66,7 @@ public class EditUserCommand implements ActionCommand {
         user.setSalary(new BigDecimal(request.getParameter("salary")));
 
         if (!userDao.update(user)) {
-            user = getUserById(request.getParameter("userId"));
+            user = UserService.getUserById(request.getParameter("userId"));
         }
         ;
 

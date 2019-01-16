@@ -26,7 +26,7 @@ public class AuthenticationFilter implements Filter {
                 if (user.getLogin().equalsIgnoreCase(login) && (user.getPassword().equalsIgnoreCase(pass)) &&
                         (user.getRolesId() != 1)) {
                     String page = ConfigurationManager.getProperty("path.page.main");
-                    RequestDispatcher dispatcher = request.getRequestDispatcher(page);  //вызов страницы ответа на запрос
+                    RequestDispatcher dispatcher = request.getRequestDispatcher(page);
                     dispatcher.forward(request, response);
                 } else {
                     filterChain.doFilter(servletRequest, servletResponse);
@@ -35,7 +35,7 @@ public class AuthenticationFilter implements Filter {
             }
         } else {
             String page = ConfigurationManager.getProperty("path.page.login");
-            RequestDispatcher dispatcher = request.getRequestDispatcher(page);  //вызов страницы ответа на запрос
+            RequestDispatcher dispatcher = request.getRequestDispatcher(page);
             dispatcher.forward(request, response);
         }
 

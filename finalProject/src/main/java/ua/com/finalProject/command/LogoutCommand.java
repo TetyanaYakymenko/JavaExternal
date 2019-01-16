@@ -13,7 +13,6 @@ public class LogoutCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
 
-        // уничтожение сессии
         request.getSession().removeAttribute(PARAM_NAME_LOGIN);
         request.getSession().removeAttribute(PARAM_NAME_PASSWORD);
         request.getSession().removeAttribute(PARAM_NAME_ROLE);

@@ -1,19 +1,13 @@
 package ua.com.finalProject.command;
 
-import ua.com.finalProject.logic.Logic;
+import ua.com.finalProject.logic.UserService;
 import ua.com.finalProject.managers.ConfigurationManager;
-import ua.com.finalProject.persistence.ConnectionPool;
-import ua.com.finalProject.persistence.dao.UserDao;
 import ua.com.finalProject.persistence.entities.User;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public class RegisterCommand implements ActionCommand {
-    private static final String PARAM_NAME = "name";
     private static final String REGISTRATION_PAGE = "path.page.registration";
-    private static final String MAIN_PAGE = "path.page.main";
 
     @Override
     public String execute(HttpServletRequest request) {
@@ -38,7 +32,7 @@ public class RegisterCommand implements ActionCommand {
         user.setEmail(email);
         user.setPhone(phone);
 
-        Logic.AddUser(user);
+        UserService.AddUser(user);
         request.setAttribute("login", login);
         request.setAttribute("password", password);
         return new LoginCommand().execute(request);

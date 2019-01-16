@@ -36,39 +36,45 @@ public class ReportDisplay {
         return result.toString();
     }
 
-    public class Builder{
+    public class Builder {
         public Builder setReportId(int id) {
             ReportDisplay.this.report.setId(id);
             return this;
         }
+
         public Builder setReportName(String name) {
             ReportDisplay.this.report.setName(name);
             return this;
         }
+
         public Builder setReportText(String text) {
             ReportDisplay.this.report.setText(text);
             return this;
         }
-        public Builder setSpeaker(String speaker){
+
+        public Builder setSpeaker(String speaker) {
             String[] words = speaker.split(" ");
             ReportDisplay.this.user.setSurname(words[0]);
             ReportDisplay.this.user.setName(words[1]);
             return this;
         }
+
         public Builder setConferenceName(String text) {
             ReportDisplay.this.conference.setName(text);
             return this;
         }
+
         public Builder setDate(GregorianCalendar date) {
             ReportDisplay.this.conference.setDate(date);
             return this;
         }
+
         public Builder setPlace(String place) {
             ReportDisplay.this.conference.setPlace(place);
             return this;
         }
 
-        public ReportDisplay build(){
+        public ReportDisplay build() {
             return ReportDisplay.this;
         }
     }
@@ -85,17 +91,19 @@ public class ReportDisplay {
         return conference.getPlace();
     }
 
-    public int getId(){
+    public int getId() {
         return report.getId();
     }
 
     public Report getReport() {
         return report;
     }
-    public Conference getConference(){
+
+    public Conference getConference() {
         return conference;
     }
-    public User getUser(){
+
+    public User getUser() {
         return user;
     }
 }

@@ -31,8 +31,8 @@
             </div>
             <div class="form-group mx-auto">
                 <label for="EditForm" style="width: 100px;"><fmt:message key="edit_date"/> :</label>
-                <fmt:formatDate value="${r.getDate().getTime()}"  pattern = "dd/mm/yyyy"  var = "date"/>
-                <input type = "text"  style="width: 300px;" name = "date"   value ="${date}" />
+
+                <input type = "date" style="width: 300px;" name = "date" value ="<fmt:formatDate pattern='yyyy-MM-dd' value ='${reportDisplay.getDate().getTime()}'/>" />
                 <br/>
             </div>
             <div class="form-group mx-auto">

@@ -1,7 +1,7 @@
 package ua.com.finalProject.command;
 
 import ua.com.finalProject.displaymodel.ReportDisplay;
-import ua.com.finalProject.logic.Logic;
+import ua.com.finalProject.logic.ReportService;
 import ua.com.finalProject.managers.ConfigurationManager;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,29 +11,30 @@ import java.util.stream.Collectors;
 
 public class ReportsCommand implements ActionCommand {
     @Override
-    public String execute(HttpServletRequest request){
-        List<ReportDisplay> reports = Logic.getReportsDisplay();
+    public String execute(HttpServletRequest request) {
+        List<ReportDisplay> reports = ReportService.getReportsDisplay();
         String past = request.getParameter("past");
         String upcoming = request.getParameter("upcoming");
-         if(past != null){
-             reports = getPastReportDisplay(reports);
-         }
-         if(upcoming != null){
-             reports = getUpdateReportDisplay(reports);
-         }
+        if (past != null) {
+            reports = getPastReportDisplay(reports);
+        }
+        if (upcoming != null) {
+            reports = getUpdateReportDisplay(reports);
+        }
 
-        request. setAttribute("reports", reports);
+        request.setAttribute("reports", reports);
 
-        String page = ConfigurationManager.getProperty("path.page.reports"); //вызов страницы ответа на запрос
+        String page = ConfigurationManager.getProperty("path.page.reports");
         return page;
     }
 
-    private List<ReportDisplay> getPastReportDisplay(List<ReportDisplay> list){
+    private List<ReportDisplay> getPastReportDisplay(List<ReportDisplay> list) {
         GregorianCalendar today = new GregorianCalendar();
         List<ReportDisplay> result = list.stream().filter(c -> c.getDate().before(today)).collect(Collectors.toList());
         return result;
     }
-    private List<ReportDisplay> getUpdateReportDisplay(List<ReportDisplay> list){
+
+    private List<ReportDisplay> getUpdateReportDisplay(List<ReportDisplay> list) {
         GregorianCalendar today = new GregorianCalendar();
         return list.stream().filter(c -> c.getDate().after(today)).collect(Collectors.toList());
     }
