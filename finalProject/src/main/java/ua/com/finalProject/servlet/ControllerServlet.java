@@ -44,7 +44,7 @@ public class ControllerServlet extends HttpServlet {
             request.getSession().setAttribute("nullPage",
                     MessageManager.getProperty("message.nullpage"));
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-// вызов страницы ответа на запрос
+
             dispatcher.forward(request, response);
             ;
         }

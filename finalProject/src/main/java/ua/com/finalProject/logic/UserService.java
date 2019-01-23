@@ -9,9 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
+    List s = new ArrayList();
     private static final Logger log = Logger.getLogger(UserService.class);
 
     public static User getUserbyLoginAndPassword(String enterLogin, String enterPass) {

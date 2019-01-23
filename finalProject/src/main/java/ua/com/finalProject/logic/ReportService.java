@@ -66,18 +66,25 @@ public class ReportService {
 
         ReportDao reportDao = new ReportDao(connection);
         boolean result1 = reportDao.update(reportDisplay.getReport());
-        connection.commit();
+
+
 
         ConferenceDao conferenceDao = new ConferenceDao(connection);
         boolean result2 = conferenceDao.update(reportDisplay.getConference());
-        connection.commit();
+
 
         UserDao userDao = new UserDao(connection);
         boolean result3 = userDao.update(reportDisplay.getUser());
+        boolean result = result1 && result2 && result3;
+        if(result){
+            connection.commit();
+        }else{
+            connection.rollback();
+        }
+        connectionPool.closeConnection(connection);
+       // ConnectionService.commitAndCloseConnection(connection);
 
-        ConnectionService.commitAndCloseConnection(connection);
-
-        return result1 && result2 && result3;
+        return result;
     }
 
 

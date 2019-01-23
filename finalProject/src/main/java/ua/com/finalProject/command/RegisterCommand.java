@@ -8,10 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 
 public class RegisterCommand implements ActionCommand {
     private static final String REGISTRATION_PAGE = "path.page.registration";
+    public static final String A = "asd";
 
     @Override
     public String execute(HttpServletRequest request) {
-        String page = null;
+
+        String  page = null;
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String name = request.getParameter("name");
